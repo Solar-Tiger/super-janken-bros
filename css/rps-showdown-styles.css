@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.rps-gui-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.player-choices {
+  display: flex;
+  justify-content: center;
+}
+
+.rps-players-container {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.player,
+.computer {
+  font-size: 4rem;
+}
+
+.rps-score-container {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.player-score,
+.computer-score {
+  font-size: 4rem;
+}
+
+.rps-btn {
+  margin: 10px;
+  padding: 5px 10px;
+}
+
+.rps-updates-container {
+  display: flex;
+  justify-content: center;
+}
+
+.rps-reset-button-container {
+  display: flex;
+  justify-content: center;
+}
