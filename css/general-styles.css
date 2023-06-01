@@ -52,6 +52,8 @@ body {
 .rps-updates-container {
   display: flex;
   justify-content: center;
+  text-align: center;
+  min-height: 44px;
 }
 
 .rps-reset-button-container {
