@@ -106,6 +106,8 @@ resetButton.addEventListener('click', () => {
   playerChoices.addEventListener('click', gameTime);
 });
 
+// FETCHES RPS SHOWDOWN BACKGROUND FROM LOCAL STORAGE BASED ON WHAT WAS PICKED AT STAGE SELECT
+
 const rpsShowdownPage = document.querySelector('.rps-showdown');
 let shodownBgImg = localStorage.getItem('stagename');
 
