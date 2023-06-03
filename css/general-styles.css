@@ -61,7 +61,7 @@ body {
   justify-content: center;
 }
 
-/* RPS CHARACTER SELECT CSS */
+/* RPS CHARACTER SELECT AND STAGE SELECT*/
 
 .character-select-box {
   display: flex;
@@ -71,6 +71,18 @@ body {
 }
 
 .character-portrait {
+  flex: 0;
+  border: 2px solid black;
+}
+
+.stage-select-box {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.stage-portrait {
   flex: 0;
   border: 2px solid black;
 }
