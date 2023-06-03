@@ -106,11 +106,10 @@ resetButton.addEventListener('click', () => {
   playerChoices.addEventListener('click', gameTime);
 });
 
-// FUNCTION TO CHANGE BACKGROUND IMG ON RPS SHOWDOWN
+const rpsShowdownPage = document.querySelector('.rps-showdown');
+let shodownBgImg = localStorage.getItem('stagename');
 
-const shodownBgImg = document.querySelector('.rps-showdown');
-
-shodownBgImg.style.backgroundImage = 'url(images/final_destination.jpg)';
-shodownBgImg.style.backgroundRepeat = 'no-repeat';
-shodownBgImg.style.backgroundSize = 'cover';
-shodownBgImg.style.backgroundPosition = 'center top';
+rpsShowdownPage.style.backgroundImage = `url(${shodownBgImg})`;
+rpsShowdownPage.style.backgroundRepeat = 'no-repeat';
+rpsShowdownPage.style.backgroundSize = 'cover';
+rpsShowdownPage.style.backgroundPosition = 'center top';

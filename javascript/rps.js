@@ -108,9 +108,12 @@ resetButton.addEventListener('click', () => {
 
 // FUNCTION TO CHANGE BACKGROUND IMG ON RPS SHOWDOWN
 
-const shodownBgImg = document.querySelector('.rps-showdown');
+const shodownBgImg = localStorage.getItem('stagename');
 
-shodownBgImg.style.backgroundImage = 'url(images/final_destination.jpg)';
+console.log(shodownBgImg);
+console.log('Hi');
+
+shodownBgImg.style.backgroundImage = `url${shodownBgImg}`;
 shodownBgImg.style.backgroundRepeat = 'no-repeat';
 shodownBgImg.style.backgroundSize = 'cover';
 shodownBgImg.style.backgroundPosition = 'center top';
