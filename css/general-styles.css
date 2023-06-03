@@ -65,10 +65,12 @@ body {
 
 .character-select-box {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
+  gap: 10px;
 }
 
 .character-portrait {
-  flex: 1 0 50%;
+  flex: 0;
   border: 2px solid black;
 }
