@@ -60,3 +60,15 @@ body {
   display: flex;
   justify-content: center;
 }
+
+/* RPS CHARACTER SELECT CSS */
+
+.character-select-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.character-portrait {
+  flex: 1 0 50%;
+  border: 2px solid black;
+}
