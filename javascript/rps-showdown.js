@@ -106,6 +106,13 @@ resetButton.addEventListener('click', () => {
   playerChoices.addEventListener('click', gameTime);
 });
 
+// FETCHES RPS CHARACTER PORTRAIT FROM LOCAL STORAGE BASED ON WHAT WAS PICKED AT CHARACTER SELECT
+
+const playersPortrait = document.querySelector('.picked-player');
+let characterPortrait = localStorage.getItem('characterportrait');
+
+playersPortrait.src = `${characterPortrait}`;
+
 // FETCHES RPS SHOWDOWN BACKGROUND FROM LOCAL STORAGE BASED ON WHAT WAS PICKED AT STAGE SELECT
 
 const rpsShowdownPage = document.querySelector('.rps-showdown');
