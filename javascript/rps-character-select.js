@@ -1,8 +1,8 @@
 /* eslint-disable prefer-const */
 
-let stageBackground = document.querySelectorAll('.stage-background');
+let characterPortrait = document.querySelectorAll('.character-portrait');
 
-stageBackground.forEach((stage) => {
+characterPortrait.forEach((stage) => {
   stage.addEventListener('click', () => {
     localStorage.setItem('stagename', stage.src);
   });
