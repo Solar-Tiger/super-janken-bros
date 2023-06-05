@@ -61,7 +61,7 @@ body {
   justify-content: center;
 }
 
-/* RPS CHARACTER SELECT AND STAGE SELECT */
+/* RPS CHARACTER SELECT */
 
 .character-select-box {
   display: flex;
@@ -75,6 +75,8 @@ body {
   border: 2px solid black;
 }
 
+/* RPS STAGE SELECT */
+
 .stage-select-box {
   display: flex;
   justify-content: center;
@@ -84,5 +86,16 @@ body {
 
 .stage-portrait {
   flex: 0;
+  border: 2px solid black;
+}
+
+/* RPS SHOWDOWN CHARACTER PORTRAIT */
+
+.player-portrait,
+.computer-portrait {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   border: 2px solid black;
 }
