@@ -3,6 +3,44 @@
 
 const rpsShowdownPage = document.querySelector('.rps-showdown');
 
+const bodyName = document.body.className;
+
+switch (bodyName) {
+  case 'rps-character-select':
+    rpsCharacterChoice();
+    break;
+  case 'rps-stage-select':
+    rpsStageChoice();
+    break;
+  case 'rps-showdown':
+    retrieveResults();
+
+    rpsShowdown();
+    break;
+  default:
+    console.log('WRONG');
+}
+
+function rpsCharacterChoice() {
+  let characterPortrait = document.querySelectorAll('.character-portrait');
+
+  characterPortrait.forEach((character) => {
+    character.addEventListener('click', () => {
+      localStorage.setItem('characterportrait', character.src);
+    });
+  });
+}
+
+function rpsStageChoice() {
+  let stageBackground = document.querySelectorAll('.stage-background');
+
+  stageBackground.forEach((stage) => {
+    stage.addEventListener('click', () => {
+      localStorage.setItem('stagename', stage.src);
+    });
+  });
+}
+
 function rpsShowdown() {
   // RPS GAME LOGIC
 
@@ -110,26 +148,20 @@ function rpsShowdown() {
   });
 }
 
-if (rpsShowdownPage.classList.contains('rps-showdown')) {
-  rpsShowdown();
+function retrieveResults() {
+  // FETCHES RPS CHARACTER PORTRAIT FROM LOCAL STORAGE BASED ON WHAT WAS PICKED AT CHARACTER SELECT
+
+  const playersPortrait = document.querySelector('.picked-player');
+  let characterPortrait = localStorage.getItem('characterportrait');
+
+  playersPortrait.src = `${characterPortrait}`;
+
+  // FETCHES RPS SHOWDOWN BACKGROUND FROM LOCAL STORAGE BASED ON WHAT WAS PICKED AT STAGE SELECT
+
+  let shodownBgImg = localStorage.getItem('stagename');
+
+  rpsShowdownPage.style.backgroundImage = `url(${shodownBgImg})`;
+  rpsShowdownPage.style.backgroundRepeat = 'no-repeat';
+  rpsShowdownPage.style.backgroundSize = 'cover';
+  rpsShowdownPage.style.backgroundPosition = 'center top';
 }
-
-//
-
-//
-
-// FETCHES RPS CHARACTER PORTRAIT FROM LOCAL STORAGE BASED ON WHAT WAS PICKED AT CHARACTER SELECT
-
-const playersPortrait = document.querySelector('.picked-player');
-let characterPortrait = localStorage.getItem('characterportrait');
-
-playersPortrait.src = `${characterPortrait}`;
-
-// FETCHES RPS SHOWDOWN BACKGROUND FROM LOCAL STORAGE BASED ON WHAT WAS PICKED AT STAGE SELECT
-
-let shodownBgImg = localStorage.getItem('stagename');
-
-rpsShowdownPage.style.backgroundImage = `url(${shodownBgImg})`;
-rpsShowdownPage.style.backgroundRepeat = 'no-repeat';
-rpsShowdownPage.style.backgroundSize = 'cover';
-rpsShowdownPage.style.backgroundPosition = 'center top';
