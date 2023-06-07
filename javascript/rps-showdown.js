@@ -27,8 +27,18 @@ function rpsCharacterChoice() {
   characterPortrait.forEach((character) => {
     character.addEventListener('click', () => {
       localStorage.setItem('characterportrait', character.src);
+
+      updatePickedCharacter();
     });
   });
+
+  function updatePickedCharacter() {
+    const characterPicked = document.querySelector('.character-picked');
+
+    const pickedCharacter = localStorage.getItem('characterportrait');
+
+    characterPicked.src = `${pickedCharacter}`;
+  }
 }
 
 function rpsStageChoice() {
