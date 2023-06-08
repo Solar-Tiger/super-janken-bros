@@ -47,8 +47,18 @@ function rpsStageChoice() {
   stageBackground.forEach((stage) => {
     stage.addEventListener('click', () => {
       localStorage.setItem('stagename', stage.src);
+
+      updateStagePicked();
     });
   });
+}
+
+function updateStagePicked() {
+  const stagePicked = document.querySelector('.stage-picked');
+
+  const pickedStage = localStorage.getItem('stagename');
+
+  stagePicked.src = `${pickedStage}`;
 }
 
 function rpsShowdown() {
