@@ -78,6 +78,10 @@ body {
 
 /* RPS STAGE SELECT */
 
+.rps-stage-select {
+  margin-top: auto;
+}
+
 .stage-select-box {
   display: flex;
   justify-content: center;
