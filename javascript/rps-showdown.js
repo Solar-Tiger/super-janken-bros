@@ -22,6 +22,16 @@ switch (bodyName) {
 }
 
 function rpsCharacterChoice() {
+  let characterPicked = document.querySelector('.character-picked');
+
+  let characterAttr = characterPicked.getAttribute('src');
+
+  if (characterAttr.src) {
+    characterPicked.src = 'images/fairy.png';
+  } else {
+    characterPicked.src = localStorage.getItem('characterportrait');
+  }
+
   let characterPortrait = document.querySelectorAll('.character-portrait');
 
   characterPortrait.forEach((character) => {
@@ -44,6 +54,16 @@ function updatePickedCharacter() {
 }
 
 function rpsStageChoice() {
+  let stagePicked = document.querySelector('.stage-picked');
+
+  let characterAttr = stagePicked.getAttribute('src');
+
+  if (characterAttr.src) {
+    stagePicked.src = 'images/final-destination';
+  } else {
+    stagePicked.src = localStorage.getItem('stagename');
+  }
+
   let stageBackground = document.querySelectorAll('.stage-background');
 
   stageBackground.forEach((stage) => {
