@@ -26,8 +26,8 @@ function rpsCharacterChoice() {
 
   let characterAttr = characterPicked.getAttribute('src');
 
-  if (characterAttr.src) {
-    characterPicked.src = 'images/fairy.png';
+  if (!characterAttr.src) {
+    characterPicked.src = 'images/rps-characters/fairy.png';
   } else {
     characterPicked.src = localStorage.getItem('characterportrait');
   }
@@ -56,10 +56,10 @@ function updatePickedCharacter() {
 function rpsStageChoice() {
   let stagePicked = document.querySelector('.stage-picked');
 
-  let characterAttr = stagePicked.getAttribute('src');
+  let stageAttr = stagePicked.getAttribute('src');
 
-  if (characterAttr.src) {
-    stagePicked.src = 'images/final-destination';
+  if (!stageAttr.src) {
+    stagePicked.src = 'images/rps-stages/final-destination.jpg';
   } else {
     stagePicked.src = localStorage.getItem('stagename');
   }
