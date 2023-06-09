@@ -31,14 +31,16 @@ function rpsCharacterChoice() {
       updatePickedCharacter();
     });
   });
+}
 
-  function updatePickedCharacter() {
-    const characterPicked = document.querySelector('.character-picked');
+function updatePickedCharacter() {
+  const characterPicked = document.querySelector('.character-picked');
 
-    const pickedCharacter = localStorage.getItem('characterportrait');
+  const pickedCharacter = localStorage.getItem('characterportrait');
 
-    characterPicked.src = `${pickedCharacter}`;
-  }
+  characterPicked.src = `${pickedCharacter}`;
+
+  return characterPicked;
 }
 
 function rpsStageChoice() {
@@ -59,6 +61,8 @@ function updateStagePicked() {
   const pickedStage = localStorage.getItem('stagename');
 
   stagePicked.src = `${pickedStage}`;
+
+  return stagePicked;
 }
 
 function rpsShowdown() {
