@@ -1,3 +1,5 @@
+/* GENERAL CSS STYLES */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -17,6 +19,50 @@ body {
 .links {
   color: black;
 }
+
+/* RPS CHARACTER SELECT */
+
+.character-select-box {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.character-portrait {
+  flex: 0;
+  border: 2px solid black;
+}
+
+/* RPS STAGE SELECT */
+
+.rps-stage-select {
+  min-height: 100%;
+}
+
+.stage-select-box {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.stage-background {
+  flex: 0;
+  border: 2px solid black;
+}
+
+/* RPS SHOWDOWN CHARACTER PORTRAIT */
+
+.player-portrait,
+.computer-portrait {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* RPS SHOWDOWN */
 
 .player-choices {
   display: flex;
@@ -60,46 +106,4 @@ body {
 .rps-reset-button-container {
   display: flex;
   justify-content: center;
-}
-
-/* RPS CHARACTER SELECT */
-
-.character-select-box {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.character-portrait {
-  flex: 0;
-  border: 2px solid black;
-}
-
-/* RPS STAGE SELECT */
-
-.rps-stage-select {
-  margin-top: auto;
-}
-
-.stage-select-box {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.stage-background {
-  flex: 0;
-  border: 2px solid black;
-}
-
-/* RPS SHOWDOWN CHARACTER PORTRAIT */
-
-.player-portrait,
-.computer-portrait {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
 }
