@@ -26,7 +26,7 @@ function rpsCharacterChoice() {
 
   let characterAttr = characterPicked.getAttribute('src');
 
-  if (!characterAttr.src) {
+  if (characterAttr.src) {
     characterPicked.src = 'images/rps-characters/fairy.png';
   } else {
     characterPicked.src = localStorage.getItem('characterportrait');
@@ -58,7 +58,7 @@ function rpsStageChoice() {
 
   let stageAttr = stagePicked.getAttribute('src');
 
-  if (!stageAttr.src) {
+  if (stageAttr.src) {
     stagePicked.src = 'images/rps-stages/final-destination.jpg';
   } else {
     stagePicked.src = localStorage.getItem('stagename');
