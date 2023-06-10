@@ -3,6 +3,8 @@
 
 const rpsShowdownPage = document.querySelector('.rps-showdown');
 
+// RUN SPECIFIC FUNCTION BASED ON WHAT PAGE IS LOADED
+
 const bodyName = document.body.className;
 
 switch (bodyName) {
@@ -20,6 +22,8 @@ switch (bodyName) {
   default:
     console.log('WRONG');
 }
+
+// GET CHARACTER CHOICE AND UPDATE CHARACTER PREVIEW
 
 function rpsCharacterChoice() {
   let characterPicked = document.querySelector('.character-picked');
@@ -52,6 +56,8 @@ function updatePickedCharacter() {
   return characterPicked;
 }
 
+// GET STAGE CHOICE AND UPDATE STAGE PREVIEW
+
 function rpsStageChoice() {
   let stagePicked = document.querySelector('.stage-picked');
   let savedStagePick = localStorage.getItem('stagename');
@@ -83,16 +89,16 @@ function updateStagePicked() {
   return stagePicked;
 }
 
-function rpsShowdown() {
-  // RPS GAME LOGIC
+// COMPLETE RPS GAME LOGIC TO PLAY 5 ROUNDS OF RPS
 
+function rpsShowdown() {
   const playerChoices = document.querySelector('.player-choices');
   let playerScore = document.querySelector('.player-score');
   let computerScore = document.querySelector('.computer-score');
   let rpsUpdates = document.querySelector('.choices-made');
   const resetButton = document.querySelector('.reset-button');
 
-  // asign both player and computer a score of 0
+  // ASIGN BOTH PLAYER AND COMPUTER A SCORE OF 0
   let playerUpdatedScore = 0;
   let computerUpdatedScore = 0;
 
@@ -114,7 +120,7 @@ function rpsShowdown() {
     rpsChampion();
   }
 
-  // get computers choice randomly between rock, paper and scissors and return that value
+  // GET COMUTER CHOICE OF ROCK, PAPER OR SCISSORS AND RETURN RESULT
   function computersChoice() {
     const computerChoices = ['rock', 'paper', 'scissors'];
 
@@ -123,7 +129,7 @@ function rpsShowdown() {
     return computerChoices[computerChoice];
   }
 
-  // decide what value to return based on the outcome of what the player and computer picked
+  // DECIDE IF YOU WIN, LOSE OR TIE AND RETURN THAT VALUE
   function decideRoundVictor(playerChoice, computerChoice) {
     if (playerChoice === computerChoice) {
       rpsUpdates.textContent = "It's a tie";
@@ -145,7 +151,7 @@ function rpsShowdown() {
     return 'Computer wins!';
   }
 
-  // keep track of the score based on who won each round
+  // KEEP TRACK OF SCORES BASED ON WHO WINS, LOSES OR TIES
   function updateRPSScore(roundVictor) {
     if (roundVictor === 'Player wins!') {
       playerUpdatedScore += 1;
@@ -161,7 +167,7 @@ function rpsShowdown() {
     }
   }
 
-  // once a score reaches 5, remove the event listener and end the game
+  // ONCE A SCORE REACHES 5, REMOVE EVENT LISTENER AND END THE GAME
   function rpsChampion() {
     if (playerUpdatedScore === 5) {
       rpsUpdates.textContent = 'Player is the champion!';
@@ -176,6 +182,8 @@ function rpsShowdown() {
       playerChoices.removeEventListener('click', gameTime);
     }
   }
+
+  // RESET THE GAME TO TRY AGAIN
 
   resetButton.addEventListener('click', () => {
     playerUpdatedScore = 0;
