@@ -8,6 +8,9 @@ const rpsShowdownPage = document.querySelector('.rps-showdown');
 const bodyName = document.body.className;
 
 switch (bodyName) {
+  case 'rps-options':
+    rpsOptions();
+    break;
   case 'rps-character-select':
     rpsCharacterChoice();
     break;
@@ -21,6 +24,12 @@ switch (bodyName) {
     break;
   default:
     console.log('WRONG');
+}
+
+// OPTIONS FOR VARIOUS FUNCTIONS FOR RPS
+
+function rpsOptions() {
+  console.log('Options screen');
 }
 
 // GET CHARACTER CHOICE AND UPDATE CHARACTER PREVIEW
