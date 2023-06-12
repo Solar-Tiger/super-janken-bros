@@ -20,6 +20,29 @@ body {
   color: black;
 }
 
+/* RPS OPTIONS */
+
+.amount-of-rounds {
+  display: flex;
+  flex-direction: column;
+  gap: 10px 0;
+}
+
+.round-number {
+  display: flex;
+  justify-content: center;
+  gap: 5px 20px;
+}
+
+.round-number > p {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.round-number-btn {
+  padding: 0 15px;
+}
+
 /* RPS CHARACTER SELECT */
 
 .character-select-box {

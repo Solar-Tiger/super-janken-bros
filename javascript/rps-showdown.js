@@ -29,7 +29,20 @@ switch (bodyName) {
 // OPTIONS FOR VARIOUS FUNCTIONS FOR RPS
 
 function rpsOptions() {
-  console.log('Options screen');
+  let currentRoundNumber = 5;
+  let amountOfRounds = document.querySelector('.current-round-number');
+  const lowerRoundNumber = document.querySelector('.lower-round-number');
+  const higherRoundNumber = document.querySelector('.higher-round-number');
+
+  lowerRoundNumber.addEventListener('click', () => {
+    currentRoundNumber--;
+    amountOfRounds.textContent = currentRoundNumber;
+  });
+
+  higherRoundNumber.addEventListener('click', () => {
+    currentRoundNumber++;
+    amountOfRounds.textContent = currentRoundNumber;
+  });
 }
 
 // GET CHARACTER CHOICE AND UPDATE CHARACTER PREVIEW
