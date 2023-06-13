@@ -29,19 +29,33 @@ switch (bodyName) {
 // OPTIONS FOR VARIOUS FUNCTIONS FOR RPS
 
 function rpsOptions() {
-  let currentRoundNumber = 5;
+  let currentRoundNumber;
   let amountOfRounds = document.querySelector('.current-round-number');
+
+  if (localStorage.getItem('amountOfRounds') === null) {
+    currentRoundNumber = 5;
+  } else {
+    currentRoundNumber = localStorage.getItem('amountOfRounds');
+    amountOfRounds.textContent = currentRoundNumber;
+  }
+
   const lowerRoundNumber = document.querySelector('.lower-round-number');
   const higherRoundNumber = document.querySelector('.higher-round-number');
 
   lowerRoundNumber.addEventListener('click', () => {
-    currentRoundNumber--;
-    amountOfRounds.textContent = currentRoundNumber;
+    if (parseInt(currentRoundNumber) !== 3) {
+      currentRoundNumber--;
+      amountOfRounds.textContent = currentRoundNumber;
+      localStorage.setItem('amountOfRounds', currentRoundNumber);
+    }
   });
 
   higherRoundNumber.addEventListener('click', () => {
-    currentRoundNumber++;
-    amountOfRounds.textContent = currentRoundNumber;
+    if (parseInt(currentRoundNumber) !== 9) {
+      currentRoundNumber++;
+      amountOfRounds.textContent = currentRoundNumber;
+      localStorage.setItem('amountOfRounds', currentRoundNumber);
+    }
   });
 }
 
@@ -189,16 +203,18 @@ function rpsShowdown() {
     }
   }
 
-  // ONCE A SCORE REACHES 5, REMOVE EVENT LISTENER AND END THE GAME
+  // ONCE A SCORE REACHES THE NUMBER IN LOCAL STORAGE, REMOVE EVENT LISTENER AND END THE GAME
   function rpsChampion() {
-    if (playerUpdatedScore === 5) {
+    let scoreToReach = localStorage.getItem('amountOfRounds');
+
+    if (playerUpdatedScore === parseInt(scoreToReach)) {
       rpsUpdates.textContent = 'Player is the champion!';
 
       playerChoices.removeEventListener('click', gameTime);
     }
 
     // code
-    if (computerUpdatedScore === 5) {
+    if (computerUpdatedScore === parseInt(scoreToReach)) {
       rpsUpdates.textContent = 'Computer is the champion!';
 
       playerChoices.removeEventListener('click', gameTime);
