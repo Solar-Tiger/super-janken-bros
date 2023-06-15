@@ -16,6 +16,10 @@ body {
   gap: 25px;
 }
 
+body.rps-showdown {
+  margin: 5px;
+}
+
 .links {
   color: black;
 }
