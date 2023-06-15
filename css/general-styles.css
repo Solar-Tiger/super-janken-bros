@@ -47,7 +47,21 @@ body.rps-showdown {
 }
 
 .rps-options-buttons {
-  padding: 0 15px;
+  padding: 5px 15px;
+  flex-shrink: 0;
+}
+
+.rps-game-mode {
+  /* border: 2px solid black; */
+  max-width: 320px;
+  min-width: 320px;
+}
+
+.rps-game-mode-choices {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 60px;
 }
 
 /* RPS CHARACTER SELECT */
