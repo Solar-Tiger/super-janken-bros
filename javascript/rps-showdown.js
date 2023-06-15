@@ -61,7 +61,34 @@ function rpsFirstToOptions() {
 }
 
 function rpsBestOutOfOptions() {
-  // test
+  let outOfRoundsNumber;
+  let amountOfRounds = document.querySelector('.current-round-number');
+
+  if (localStorage.getItem('outOfAmountOfRounds') === null) {
+    outOfRoundsNumber = 3;
+  } else {
+    outOfRoundsNumber = localStorage.getItem('outOfAmountOfRounds');
+    amountOfRounds.textContent = outOfRoundsNumber;
+  }
+
+  const lowerRoundNumber = document.querySelector('.lower-round-number');
+  const higherRoundNumber = document.querySelector('.higher-round-number');
+
+  lowerRoundNumber.addEventListener('click', () => {
+    if (parseInt(outOfRoundsNumber) !== 3) {
+      outOfRoundsNumber -= 2;
+      amountOfRounds.textContent = outOfRoundsNumber;
+      localStorage.setItem('amountOfRounds', outOfRoundsNumber);
+    }
+  });
+
+  higherRoundNumber.addEventListener('click', () => {
+    if (parseInt(outOfRoundsNumber) !== 9) {
+      outOfRoundsNumber += 2;
+      amountOfRounds.textContent = outOfRoundsNumber;
+      localStorage.setItem('amountOfRounds', outOfRoundsNumber);
+    }
+  });
 }
 
 function rpsGameMode() {
