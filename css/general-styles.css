@@ -53,8 +53,8 @@ body.rps-showdown {
 
 .rps-game-mode {
   /* border: 2px solid black; */
-  max-width: 320px;
-  min-width: 320px;
+  max-width: 350px;
+  min-width: 350px;
 }
 
 .rps-game-mode-choices {
@@ -62,6 +62,7 @@ body.rps-showdown {
   align-items: center;
   justify-content: space-between;
   min-height: 60px;
+  border: 2px solid black;
 }
 
 /* RPS CHARACTER SELECT */
