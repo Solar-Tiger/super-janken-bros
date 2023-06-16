@@ -47,66 +47,74 @@ switch (bodyName) {
 // OPTIONS FOR VARIOUS FUNCTIONS FOR RPS
 
 function rpsFirstToOptions() {
+  let currentRoundNumber;
   let amountOfRounds = document.querySelector('.current-round-number');
 
   if (localStorage.getItem('amountOfRounds') === null) {
     amountOfRounds.textContent = 5;
-    localStorage.setItem('amountOfRonuds', amountOfRounds.textContent);
+    localStorage.setItem('amountOfRounds', amountOfRounds.textContent);
+    currentRoundNumber = parseInt(localStorage.getItem('amountOfRounds'));
   } else {
     amountOfRounds.textContent = localStorage.getItem('amountOfRounds');
+    currentRoundNumber = parseInt(localStorage.getItem('amountOfRounds'));
   }
-
-  let currentRoundNumber = parseInt(localStorage.getItem('amountOfRonuds'));
 
   const lowerRoundNumber = document.querySelector('.lower-round-number');
   const higherRoundNumber = document.querySelector('.higher-round-number');
 
   lowerRoundNumber.addEventListener('click', () => {
-    if (parseInt(currentRoundNumber) !== 3) {
-      currentRoundNumber--;
+    if (parseInt(amountOfRounds.textContent) !== 3) {
+      currentRoundNumber -= 1;
       amountOfRounds.textContent = currentRoundNumber;
       localStorage.setItem('amountOfRounds', currentRoundNumber);
+      console.log(currentRoundNumber);
     }
   });
 
   higherRoundNumber.addEventListener('click', () => {
     if (parseInt(currentRoundNumber) !== 9) {
-      currentRoundNumber++;
+      currentRoundNumber += 1;
       amountOfRounds.textContent = currentRoundNumber;
       localStorage.setItem('amountOfRounds', currentRoundNumber);
+      console.log(currentRoundNumber);
     }
   });
 }
 
 function rpsBestOutOfOptions() {
+  let currentAmountOfRounds;
   let amountOfRounds = document.querySelector('.current-round-number');
 
   if (localStorage.getItem('outOfAmountOfRounds') === null) {
-    outOfRoundsNumber = 3;
-    amountOfRounds.textContent = outOfRoundsNumber;
-    localStorage.setItem('outOfAmountOfRounds', outOfRoundsNumber);
+    amountOfRounds.textContent = 3;
+    localStorage.setItem('outOfAmountOfRounds', amountOfRounds.textContent);
+    currentAmountOfRounds = parseInt(
+      localStorage.getItem('outOfAmountOfRounds')
+    );
   } else {
-    outOfRoundsNumber = localStorage.getItem('outOfAmountOfRonuds');
-    amountOfRounds.textContent = outOfRoundsNumber;
-    console.log(outOfRoundsNumber);
+    amountOfRounds.textContent = localStorage.getItem('outOfAmountOfRounds');
+    currentAmountOfRounds = parseInt(
+      localStorage.getItem('outOfAmountOfRounds')
+    );
   }
 
   const lowerRoundNumber = document.querySelector('.lower-round-number');
   const higherRoundNumber = document.querySelector('.higher-round-number');
 
   lowerRoundNumber.addEventListener('click', () => {
-    if (parseInt(outOfRoundsNumber) !== 3) {
-      outOfRoundsNumber -= 2;
-      amountOfRounds.textContent = outOfRoundsNumber;
-      localStorage.setItem('outOfAmountOfRounds', outOfRoundsNumber);
+    console.log('Test');
+    if (parseInt(amountOfRounds.textContent) !== 3) {
+      currentAmountOfRounds -= 2;
+      amountOfRounds.textContent = currentAmountOfRounds;
+      localStorage.setItem('outOfAmountOfRounds', currentAmountOfRounds);
     }
   });
 
   higherRoundNumber.addEventListener('click', () => {
-    if (parseInt(outOfRoundsNumber) !== 9) {
-      outOfRoundsNumber += 2;
-      amountOfRounds.textContent = outOfRoundsNumber;
-      localStorage.setItem('outOfAmountOfRounds', outOfRoundsNumber);
+    if (parseInt(amountOfRounds.textContent) !== 9) {
+      currentAmountOfRounds += 2;
+      amountOfRounds.textContent = currentAmountOfRounds;
+      localStorage.setItem('outOfAmountOfRounds', currentAmountOfRounds);
     }
   });
 }
