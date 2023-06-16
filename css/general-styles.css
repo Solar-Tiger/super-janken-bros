@@ -62,7 +62,6 @@ body.rps-showdown {
   align-items: center;
   justify-content: space-between;
   min-height: 60px;
-  border: 2px solid black;
 }
 
 /* RPS CHARACTER SELECT */

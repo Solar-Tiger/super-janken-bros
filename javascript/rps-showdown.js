@@ -1,16 +1,33 @@
+/* eslint-disable radix */
 /* eslint-disable no-undef */
 /* eslint-disable prefer-const */
 
 const rpsShowdownPage = document.querySelector('.rps-showdown');
+let currentRpsGameMode;
 
 // RUN SPECIFIC FUNCTION BASED ON WHAT PAGE IS LOADED
 
 const bodyName = document.body.className;
 
 switch (bodyName) {
-  case 'rps-first-to-options':
-    rpsFirstToOptions();
+  case 'rps-options':
+    if (localStorage.getItem('currentGameMode') === null) {
+      currentRpsGameMode = 'First to selected number';
+      localStorage.setItem('currentGameMode', currentRpsGameMode);
+    }
+
     rpsGameMode();
+
+    switch (currentRpsGameMode) {
+      case 'First to selected number':
+        rpsFirstToOptions();
+        break;
+      case 'Best out of X':
+        rpsBestOutOfOptions();
+        break;
+      default:
+        console.log('Something went wrong');
+    }
     break;
   case 'rps-character-select':
     rpsCharacterChoice();
@@ -30,15 +47,16 @@ switch (bodyName) {
 // OPTIONS FOR VARIOUS FUNCTIONS FOR RPS
 
 function rpsFirstToOptions() {
-  let currentRoundNumber;
   let amountOfRounds = document.querySelector('.current-round-number');
 
   if (localStorage.getItem('amountOfRounds') === null) {
-    currentRoundNumber = 5;
+    amountOfRounds.textContent = 5;
+    localStorage.setItem('amountOfRonuds', amountOfRounds.textContent);
   } else {
-    currentRoundNumber = localStorage.getItem('amountOfRounds');
-    amountOfRounds.textContent = currentRoundNumber;
+    amountOfRounds.textContent = localStorage.getItem('amountOfRounds');
   }
+
+  let currentRoundNumber = parseInt(localStorage.getItem('amountOfRonuds'));
 
   const lowerRoundNumber = document.querySelector('.lower-round-number');
   const higherRoundNumber = document.querySelector('.higher-round-number');
@@ -61,14 +79,16 @@ function rpsFirstToOptions() {
 }
 
 function rpsBestOutOfOptions() {
-  let outOfRoundsNumber;
   let amountOfRounds = document.querySelector('.current-round-number');
 
   if (localStorage.getItem('outOfAmountOfRounds') === null) {
     outOfRoundsNumber = 3;
-  } else {
-    outOfRoundsNumber = localStorage.getItem('outOfAmountOfRounds');
     amountOfRounds.textContent = outOfRoundsNumber;
+    localStorage.setItem('outOfAmountOfRounds', outOfRoundsNumber);
+  } else {
+    outOfRoundsNumber = localStorage.getItem('outOfAmountOfRonuds');
+    amountOfRounds.textContent = outOfRoundsNumber;
+    console.log(outOfRoundsNumber);
   }
 
   const lowerRoundNumber = document.querySelector('.lower-round-number');
@@ -78,7 +98,7 @@ function rpsBestOutOfOptions() {
     if (parseInt(outOfRoundsNumber) !== 3) {
       outOfRoundsNumber -= 2;
       amountOfRounds.textContent = outOfRoundsNumber;
-      localStorage.setItem('amountOfRounds', outOfRoundsNumber);
+      localStorage.setItem('outOfAmountOfRounds', outOfRoundsNumber);
     }
   });
 
@@ -86,7 +106,7 @@ function rpsBestOutOfOptions() {
     if (parseInt(outOfRoundsNumber) !== 9) {
       outOfRoundsNumber += 2;
       amountOfRounds.textContent = outOfRoundsNumber;
-      localStorage.setItem('amountOfRounds', outOfRoundsNumber);
+      localStorage.setItem('outOfAmountOfRounds', outOfRoundsNumber);
     }
   });
 }
@@ -95,11 +115,8 @@ function rpsGameMode() {
   let selectedRpsGameMode = document.querySelector('.rps-game-mode-choice');
   const rpsGameModeButton = document.querySelectorAll('.rps-game-mode-btn');
 
-  if (localStorage.getItem('currentGameMode') === null) {
-    selectedRpsGameMode.textContent = 'First to selected number';
-  } else {
-    selectedRpsGameMode.textContent = localStorage.getItem('currentGameMode');
-  }
+  selectedRpsGameMode.textContent = localStorage.getItem('currentGameMode');
+  currentRpsGameMode = localStorage.getItem('currentGameMode');
 
   rpsGameModeButton.forEach((button) => {
     button.addEventListener('click', () => {
@@ -109,12 +126,19 @@ function rpsGameMode() {
           'currentGameMode',
           selectedRpsGameMode.textContent
         );
-      } else {
+
+        currentRpsGameMode = localStorage.getItem('currentGameMode');
+      }
+
+      // code
+      else if (selectedRpsGameMode.textContent === 'Best out of X') {
         selectedRpsGameMode.textContent = 'First to selected number';
         localStorage.setItem(
           'currentGameMode',
           selectedRpsGameMode.textContent
         );
+
+        currentRpsGameMode = localStorage.getItem('currentGameMode');
       }
     });
   });
