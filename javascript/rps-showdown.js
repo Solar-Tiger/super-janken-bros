@@ -1,3 +1,4 @@
+/* eslint-disable prefer-arrow-callback */
 /* eslint-disable radix */
 /* eslint-disable no-undef */
 /* eslint-disable prefer-const */
@@ -30,32 +31,25 @@ switch (bodyName) {
 // OPTIONS FOR VARIOUS FUNCTIONS FOR RPS
 
 function rpsFirstToOptions() {
-  let currentRoundNumber;
+  let currentRoundNumber = parseInt(localStorage.getItem('amountOfRounds'));
   let amountOfRounds = document.querySelector('.current-round-number');
 
-  if (localStorage.getItem('amountOfRounds') === null) {
-    amountOfRounds.textContent = 5;
-    localStorage.setItem('amountOfRounds', amountOfRounds.textContent);
-    currentRoundNumber = parseInt(localStorage.getItem('amountOfRounds'));
-  } else {
-    amountOfRounds.textContent = localStorage.getItem('amountOfRounds');
-    currentRoundNumber = parseInt(localStorage.getItem('amountOfRounds'));
-  }
+  amountOfRounds.textContent = localStorage.getItem('amountOfRounds');
+  currentRoundNumber = parseInt(localStorage.getItem('amountOfRounds'));
 
   const lowerRoundNumber = document.querySelector('.lower-round-number');
   const higherRoundNumber = document.querySelector('.higher-round-number');
 
   lowerRoundNumber.addEventListener('click', () => {
-    if (parseInt(amountOfRounds.textContent) !== 3) {
+    if (parseInt(amountOfRounds.textContent) > 3) {
       currentRoundNumber -= 1;
       amountOfRounds.textContent = currentRoundNumber;
       localStorage.setItem('amountOfRounds', currentRoundNumber);
-      console.log(currentRoundNumber);
     }
   });
 
   higherRoundNumber.addEventListener('click', () => {
-    if (parseInt(currentRoundNumber) !== 9) {
+    if (parseInt(currentRoundNumber) < 9) {
       currentRoundNumber += 1;
       amountOfRounds.textContent = currentRoundNumber;
       localStorage.setItem('amountOfRounds', currentRoundNumber);
@@ -64,28 +58,16 @@ function rpsFirstToOptions() {
 }
 
 function rpsBestOutOfOptions() {
-  let currentAmountOfRounds;
+  let currentAmountOfRounds = parseInt(
+    localStorage.getItem('outOfAmountOfRounds')
+  );
   let amountOfRounds = document.querySelector('.current-round-number');
-
-  if (localStorage.getItem('outOfAmountOfRounds') === null) {
-    amountOfRounds.textContent = 3;
-    localStorage.setItem('outOfAmountOfRounds', amountOfRounds.textContent);
-    currentAmountOfRounds = parseInt(
-      localStorage.getItem('outOfAmountOfRounds')
-    );
-  } else {
-    amountOfRounds.textContent = localStorage.getItem('outOfAmountOfRounds');
-    currentAmountOfRounds = parseInt(
-      localStorage.getItem('outOfAmountOfRounds')
-    );
-  }
 
   const lowerRoundNumber = document.querySelector('.lower-round-number');
   const higherRoundNumber = document.querySelector('.higher-round-number');
 
   lowerRoundNumber.addEventListener('click', () => {
-    console.log('Test');
-    if (parseInt(amountOfRounds.textContent) !== 3) {
+    if (parseInt(amountOfRounds.textContent) > 3) {
       currentAmountOfRounds -= 2;
       amountOfRounds.textContent = currentAmountOfRounds;
       localStorage.setItem('outOfAmountOfRounds', currentAmountOfRounds);
@@ -93,7 +75,7 @@ function rpsBestOutOfOptions() {
   });
 
   higherRoundNumber.addEventListener('click', () => {
-    if (parseInt(amountOfRounds.textContent) !== 9) {
+    if (parseInt(amountOfRounds.textContent) < 9) {
       currentAmountOfRounds += 2;
       amountOfRounds.textContent = currentAmountOfRounds;
       localStorage.setItem('outOfAmountOfRounds', currentAmountOfRounds);
@@ -106,100 +88,67 @@ function rpsGameMode() {
   let selectedRpsGameMode = document.querySelector('.rps-game-mode-choice');
   const rpsGameModeButton = document.querySelectorAll('.rps-game-mode-btn');
 
-  if (localStorage.getItem('currentGameMode') === null) {
-    amountOfRounds.textContent = 5;
-    localStorage.setItem('amountOfRounds', amountOfRounds.textContent);
-    currentRpsGameMode = 'First to selected number';
-    selectedRpsGameMode.textContent = 'First to selected number';
-    localStorage.setItem('currentGameMode', currentRpsGameMode);
-  }
-
-  // code
-  else if (
-    localStorage.getItem('currentGameMode') === 'First to selected number'
-  ) {
-    amountOfRounds.textContent = localStorage.getItem('amountOfRounds');
-    selectedRpsGameMode.textContent = localStorage.getItem('currentGameMode');
-    localStorage.setItem('currentGameMode', selectedRpsGameMode.textContent);
-  }
-
-  // code
-  else if (localStorage.getItem('currentGameMode') === 'Best out of X') {
-    amountOfRounds.textContent = localStorage.getItem('outOfAmountOfRounds');
-    selectedRpsGameMode.textContent = localStorage.getItem('currentGameMode');
-    localStorage.setItem('currentGameMode', selectedRpsGameMode.textContent);
-  }
-
   rpsGameModeButton.forEach((button) => {
     button.addEventListener('click', () => {
       switch (localStorage.getItem('currentGameMode')) {
         case 'First to selected number':
-          if (
-            localStorage.getItem('currentGameMode') ===
-            'First to selected number'
-          ) {
-            selectedRpsGameMode.textContent = 'Best out of X';
-            localStorage.setItem(
-              'currentGameMode',
-              selectedRpsGameMode.textContent
-            );
-
-            if (localStorage.getItem('outOfAmountOfRounds') === null) {
-              amountOfRounds.textContent = 3;
-              localStorage.setItem(
-                'outOfAmountOfRounds',
-                amountOfRounds.textContent
-              );
-            } else {
-              amountOfRounds.textContent = localStorage.getItem(
-                'outOfAmountOfRounds'
-              );
-            }
-          }
+          selectedRpsGameMode.textContent = 'Best out of X';
+          localStorage.setItem(
+            'currentGameMode',
+            selectedRpsGameMode.textContent
+          );
+          window.location.reload();
           break;
         case 'Best out of X':
-          if (localStorage.getItem('currentGameMode') === 'Best out of X') {
-            selectedRpsGameMode.textContent = 'First to selected number';
-            localStorage.setItem(
-              'currentGameMode',
-              selectedRpsGameMode.textContent
-            );
-
-            amountOfRounds.textContent = localStorage.getItem('amountOfRounds');
-          }
+          selectedRpsGameMode.textContent = 'First to selected number';
+          localStorage.setItem(
+            'currentGameMode',
+            selectedRpsGameMode.textContent
+          );
+          window.location.reload();
           break;
         default:
-          console.log('Something went wrong');
+          console.log("It's broken");
       }
     });
   });
+
+  switch (localStorage.getItem('currentGameMode')) {
+    case null:
+      amountOfRounds.textContent = 5;
+      localStorage.setItem('amountOfRounds', amountOfRounds.textContent);
+
+      outOfAmountOfRonuds = 3;
+      localStorage.setItem('outOfAmountOfRounds', outOfAmountOfRonuds);
+
+      selectedRpsGameMode.textContent = 'First to selected number';
+      localStorage.setItem('currentGameMode', selectedRpsGameMode.textContent);
+
+      rpsFirstToOptions();
+      break;
+
+    case 'First to selected number':
+      amountOfRounds.textContent = localStorage.getItem('amountOfRounds');
+
+      selectedRpsGameMode.textContent = localStorage.getItem('currentGameMode');
+
+      rpsFirstToOptions();
+
+      break;
+
+    case 'Best out of X':
+      amountOfRounds.textContent = localStorage.getItem('outOfAmountOfRounds');
+
+      selectedRpsGameMode.textContent = localStorage.getItem('currentGameMode');
+
+      rpsBestOutOfOptions();
+
+      break;
+
+    default:
+      console.log("I'm still here");
+  }
 }
-
-// updateTestBtn.addEventListener('click', () => {
-//   switch (localStorage.getItem('currentDisplay')) {
-//     case 'Rising Sun':
-//       risingSun();
-//       break;
-//     case 'Falling Moon':
-//       fallingMoon();
-//       break;
-//     default:
-//       console.log('Something went wrong');
-//   }
-// });
-
-// sunOrMoon.addEventListener('click', () => {
-//   switch (localStorage.getItem('currentDisplay')) {
-//     case 'Rising Sun':
-//       sunBtn();
-//       break;
-//     case 'Falling Moon':
-//       moonBtn();
-//       break;
-//     default:
-//       console.log('Something went wrong');
-//   }
-// });
 
 // GET CHARACTER CHOICE AND UPDATE CHARACTER PREVIEW
 
@@ -299,6 +248,7 @@ function rpsShowdown() {
   }
 
   // GET COMUTER CHOICE OF ROCK, PAPER OR SCISSORS AND RETURN RESULT
+
   function computersChoice() {
     const computerChoices = ['rock', 'paper', 'scissors'];
 
@@ -308,6 +258,7 @@ function rpsShowdown() {
   }
 
   // DECIDE IF YOU WIN, LOSE OR TIE AND RETURN THAT VALUE
+
   function decideRoundVictor(playerChoice, computerChoice) {
     if (playerChoice === computerChoice) {
       rpsUpdates.textContent = "It's a tie";
@@ -330,6 +281,7 @@ function rpsShowdown() {
   }
 
   // KEEP TRACK OF SCORES BASED ON WHO WINS, LOSES OR TIES
+
   function updateRPSScore(roundVictor) {
     if (roundVictor === 'Player wins!') {
       playerUpdatedScore += 1;
@@ -346,6 +298,7 @@ function rpsShowdown() {
   }
 
   // ONCE A SCORE REACHES THE NUMBER IN LOCAL STORAGE, REMOVE EVENT LISTENER AND END THE GAME
+
   function rpsChampion() {
     let scoreToReach = localStorage.getItem('amountOfRounds');
 
@@ -395,3 +348,75 @@ function retrieveResults() {
   rpsShowdownPage.style.backgroundSize = 'cover';
   rpsShowdownPage.style.backgroundPosition = 'center top';
 }
+
+// rpsGameModeButton.forEach((button) => {
+//   button.addEventListener('click', () => {
+//     switch (localStorage.getItem('currentGameMode')) {
+//       case 'Best out of X':
+//         if (
+//           localStorage.getItem('currentGameMode') !== 'First to selected number'
+//         ) {
+//           selectedRpsGameMode.textContent = 'First to selected number';
+//           localStorage.setItem(
+//             'currentGameMode',
+//             selectedRpsGameMode.textContent
+//           );
+
+//           amountOfRounds.textContent = localStorage.getItem('amountOfRounds');
+//         }
+
+//         lowerRoundNumber.addEventListener('click', () => {
+//           if (parseInt(amountOfRounds.textContent) >= 3) {
+//             currentRoundNumber -= 1;
+//             amountOfRounds.textContent = currentRoundNumber;
+//             localStorage.setItem('amountOfRounds', currentRoundNumber);
+//           }
+//         });
+
+//         higherRoundNumber.addEventListener('click', () => {
+//           if (parseInt(amountOfRounds.textContent) <= 9) {
+//             currentRoundNumber += 1;
+//             amountOfRounds.textContent = currentRoundNumber;
+//             localStorage.setItem('amountOfRounds', currentRoundNumber);
+//           }
+//         });
+
+//         break;
+//       case 'First to selected number':
+//         if (localStorage.getItem('currentGameMode') !== 'Best out of X') {
+//           selectedRpsGameMode.textContent = 'Best out of X';
+//           localStorage.setItem(
+//             'currentGameMode',
+//             selectedRpsGameMode.textContent
+//           );
+
+//           amountOfRounds.textContent = localStorage.getItem(
+//             'outOfAmountOfRounds'
+//           );
+//         }
+
+//         lowerRoundNumber.addEventListener('click', () => {
+//           if (parseInt(amountOfRounds.textContent) >= 3) {
+//             currentAmountOfRounds -= 2;
+//             amountOfRounds.textContent = currentAmountOfRounds;
+//             localStorage.setItem('outOfAmountOfRounds', currentAmountOfRounds);
+//             console.log('Left');
+//           }
+//         });
+
+//         higherRoundNumber.addEventListener('click', () => {
+//           if (parseInt(amountOfRounds.textContent) <= 9) {
+//             currentAmountOfRounds += 2;
+//             amountOfRounds.textContent = currentAmountOfRounds;
+//             localStorage.setItem('outOfAmountOfRounds', currentAmountOfRounds);
+//             console.log('Right');
+//           }
+//         });
+
+//         console.log(localStorage.getItem('currentGameMode'));
+//         break;
+//       default:
+//         console.log('Something went wrong');
+//     }
+//   });
+// });
