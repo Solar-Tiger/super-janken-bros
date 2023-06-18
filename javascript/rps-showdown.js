@@ -41,6 +41,7 @@ function rpsGameMode() {
   let selectedRpsGameMode = document.querySelector('.rps-game-mode-choice');
   const rpsGameModeButton = document.querySelectorAll('.rps-game-mode-btn');
   let currentGameMode = localStorage.getItem('currentGameMode');
+  let outOfAmountOfRoundsTwo;
 
   // CONTROLS WHAT RPS GAME MODE IS SELECTED
   rpsGameModeButton.forEach((button) => {
@@ -54,8 +55,11 @@ function rpsGameMode() {
     amountOfRounds.textContent = 5;
     localStorage.setItem('amountOfRounds', amountOfRounds.textContent);
 
-    outOfAmountOfRonuds = 3;
+    let outOfAmountOfRonuds = 3;
     localStorage.setItem('outOfAmountOfRounds', outOfAmountOfRonuds);
+
+    outOfAmountOfRoundsTwo = 2;
+    localStorage.setItem('outOfAmountOfRoundsTwo', outOfAmountOfRoundsTwo);
 
     selectedRpsGameMode.textContent = 'First to selected number';
     localStorage.setItem('currentGameMode', selectedRpsGameMode.textContent);
@@ -158,13 +162,17 @@ function bestOutOfNumberLower() {
   let currentAmountOfRounds = parseInt(
     localStorage.getItem('outOfAmountOfRounds')
   );
+  let currentAmountOfRoundsTwo = parseInt(
+    localStorage.getItem('outOfAmountOfRoundsTwo')
+  );
   let amountOfRounds = document.querySelector('.current-round-number');
 
   if (parseInt(localStorage.getItem('outOfAmountOfRounds')) > 3) {
-    console.log(currentAmountOfRounds);
     currentAmountOfRounds -= 2;
+    currentAmountOfRoundsTwo -= 1;
     amountOfRounds.textContent = currentAmountOfRounds;
     localStorage.setItem('outOfAmountOfRounds', currentAmountOfRounds);
+    localStorage.setItem('outOfAmountOfRoundsTwo', currentAmountOfRoundsTwo);
   }
 }
 
@@ -172,12 +180,17 @@ function bestOutOfNumberHigher() {
   let currentAmountOfRounds = parseInt(
     localStorage.getItem('outOfAmountOfRounds')
   );
+  let currentAmountOfRoundsTwo = parseInt(
+    localStorage.getItem('outOfAmountOfRoundsTwo')
+  );
   let amountOfRounds = document.querySelector('.current-round-number');
 
   if (parseInt(localStorage.getItem('outOfAmountOfRounds')) < 9) {
     currentAmountOfRounds += 2;
+    currentAmountOfRoundsTwo += 1;
     amountOfRounds.textContent = currentAmountOfRounds;
     localStorage.setItem('outOfAmountOfRounds', currentAmountOfRounds);
+    localStorage.setItem('outOfAmountOfRoundsTwo', currentAmountOfRoundsTwo);
   }
 }
 
@@ -345,19 +358,49 @@ function rpsShowdown() {
   // ONCE A SCORE REACHES THE NUMBER IN LOCAL STORAGE, REMOVE EVENT LISTENER AND END THE GAME
 
   function rpsChampion() {
-    let scoreToReach = localStorage.getItem('amountOfRounds');
+    let rpsChampionGameMode = localStorage.getItem('currentGameMode');
 
-    if (playerUpdatedScore === parseInt(scoreToReach)) {
-      rpsUpdates.textContent = 'Player is the champion!';
+    // IF RPS CHAMPION GAME MODE IS FIRST TO SELECTED NUMBER
+    if (rpsChampionGameMode === 'First to selected number') {
+      let firstToNumberScore = localStorage.getItem('amountOfRounds');
 
-      playerChoices.removeEventListener('click', gameTime);
+      if (playerUpdatedScore === parseInt(firstToNumberScore)) {
+        rpsUpdates.textContent = 'Player is the champion!';
+
+        playerChoices.removeEventListener('click', gameTime);
+      }
+
+      // code
+      if (computerUpdatedScore === parseInt(firstToNumberScore)) {
+        rpsUpdates.textContent = 'Computer is the champion!';
+
+        playerChoices.removeEventListener('click', gameTime);
+      }
     }
 
-    // code
-    if (computerUpdatedScore === parseInt(scoreToReach)) {
-      rpsUpdates.textContent = 'Computer is the champion!';
+    // IF RPS CHAMPION GAME MODE IS BEST OUT OF X
+    else if (rpsChampionGameMode === 'Best out of X') {
+      let bestOutOfNumberScoreOne = parseInt(
+        localStorage.getItem('outOfAmountOfRounds')
+      );
+      let bestOutOfNumberScoreTwo = parseInt(
+        localStorage.getItem('outOfAmountOfRoundsTwo')
+      );
+      let finalBestOutOfScore =
+        (bestOutOfNumberScoreOne % bestOutOfNumberScoreTwo) + 1;
 
-      playerChoices.removeEventListener('click', gameTime);
+      if (playerUpdatedScore === parseInt(finalBestOutOfScore)) {
+        rpsUpdates.textContent = 'Player is the champion!';
+
+        playerChoices.removeEventListener('click', gameTime);
+      }
+
+      // code
+      if (computerUpdatedScore === parseInt(finalBestOutOfScore)) {
+        rpsUpdates.textContent = 'Computer is the champion!';
+
+        playerChoices.removeEventListener('click', gameTime);
+      }
     }
   }
 
