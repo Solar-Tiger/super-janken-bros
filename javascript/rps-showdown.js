@@ -284,7 +284,9 @@ function rpsShowdown() {
   const resetButton = document.querySelector('.reset-button');
   let rpsChampionGameMode = localStorage.getItem('currentGameMode');
 
+  localStorage.removeItem('noChoice');
   localStorage.setItem('noChoice', 0);
+  localStorage.removeItem('playerChoice');
 
   // IF RPS CHAMPION GAME MODE IS NULL
   if (rpsChampionGameMode === null) {
@@ -312,7 +314,10 @@ function rpsShowdown() {
 
     localStorage.setItem('playerChoice', playersChoice);
 
-    let roundVictor = decideRoundVictor(playersChoice, computersChoice());
+    let roundVictor = decideRoundVictor(
+      playersChoice,
+      computersChoice(playersChoice)
+    );
 
     updateRPSScore(roundVictor);
 
@@ -321,7 +326,7 @@ function rpsShowdown() {
 
   // GET COMUTER CHOICE OF ROCK, PAPER OR SCISSORS AND RETURN RESULT
 
-  function computersChoice() {
+  function computersChoice(pChoice) {
     if (
       (pChoice === 'rock' || pChoice === 'paper' || pChoice === 'scissors') &&
       localStorage.getItem('noChoice') === '0'
@@ -341,7 +346,7 @@ function rpsShowdown() {
         'paper',
         'rock',
         'paper',
-        'scissors',
+        'rock',
         'paper',
         'rock',
         'paper',
@@ -364,7 +369,7 @@ function rpsShowdown() {
         'scissors',
         'paper',
         'scissors',
-        'rock',
+        'paper',
         'scissors',
         'paper',
         'scissors',
@@ -387,7 +392,7 @@ function rpsShowdown() {
         'scissors',
         'rock',
         'scissors',
-        'paper',
+        'rock',
         'scissors',
         'rock',
         'scissors',
@@ -502,6 +507,8 @@ function rpsShowdown() {
 
     computerUpdatedScore = 0;
     computerScore.textContent = 0;
+
+    localStorage.setItem('noChoice', 0);
 
     rpsUpdates.textContent = 'Click buttons to begin!';
 
