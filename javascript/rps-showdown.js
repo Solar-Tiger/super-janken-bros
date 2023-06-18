@@ -30,87 +30,13 @@ switch (bodyName) {
 
 // OPTIONS FOR VARIOUS FUNCTIONS FOR RPS
 
-function rpsFirstToOptions() {
-  let currentRoundNumber = parseInt(localStorage.getItem('amountOfRounds'));
-  let amountOfRounds = document.querySelector('.current-round-number');
-
-  amountOfRounds.textContent = localStorage.getItem('amountOfRounds');
-  currentRoundNumber = parseInt(localStorage.getItem('amountOfRounds'));
-
-  const lowerRoundNumber = document.querySelector('.lower-round-number');
-  const higherRoundNumber = document.querySelector('.higher-round-number');
-
-  lowerRoundNumber.addEventListener('click', () => {
-    if (parseInt(amountOfRounds.textContent) > 3) {
-      currentRoundNumber -= 1;
-      amountOfRounds.textContent = currentRoundNumber;
-      localStorage.setItem('amountOfRounds', currentRoundNumber);
-    }
-  });
-
-  higherRoundNumber.addEventListener('click', () => {
-    if (parseInt(currentRoundNumber) < 9) {
-      currentRoundNumber += 1;
-      amountOfRounds.textContent = currentRoundNumber;
-      localStorage.setItem('amountOfRounds', currentRoundNumber);
-    }
-  });
-}
-
-function rpsBestOutOfOptions() {
-  let currentAmountOfRounds = parseInt(
-    localStorage.getItem('outOfAmountOfRounds')
-  );
-  let amountOfRounds = document.querySelector('.current-round-number');
-
-  const lowerRoundNumber = document.querySelector('.lower-round-number');
-  const higherRoundNumber = document.querySelector('.higher-round-number');
-
-  lowerRoundNumber.addEventListener('click', () => {
-    if (parseInt(amountOfRounds.textContent) > 3) {
-      currentAmountOfRounds -= 2;
-      amountOfRounds.textContent = currentAmountOfRounds;
-      localStorage.setItem('outOfAmountOfRounds', currentAmountOfRounds);
-    }
-  });
-
-  higherRoundNumber.addEventListener('click', () => {
-    if (parseInt(amountOfRounds.textContent) < 9) {
-      currentAmountOfRounds += 2;
-      amountOfRounds.textContent = currentAmountOfRounds;
-      localStorage.setItem('outOfAmountOfRounds', currentAmountOfRounds);
-    }
-  });
-}
-
 function rpsGameMode() {
   let amountOfRounds = document.querySelector('.current-round-number');
   let selectedRpsGameMode = document.querySelector('.rps-game-mode-choice');
   const rpsGameModeButton = document.querySelectorAll('.rps-game-mode-btn');
 
   rpsGameModeButton.forEach((button) => {
-    button.addEventListener('click', () => {
-      switch (localStorage.getItem('currentGameMode')) {
-        case 'First to selected number':
-          selectedRpsGameMode.textContent = 'Best out of X';
-          localStorage.setItem(
-            'currentGameMode',
-            selectedRpsGameMode.textContent
-          );
-          window.location.reload();
-          break;
-        case 'Best out of X':
-          selectedRpsGameMode.textContent = 'First to selected number';
-          localStorage.setItem(
-            'currentGameMode',
-            selectedRpsGameMode.textContent
-          );
-          window.location.reload();
-          break;
-        default:
-          console.log("It's broken");
-      }
-    });
+    button.addEventListener('click', switchRpsGameMode);
   });
 
   switch (localStorage.getItem('currentGameMode')) {
@@ -125,28 +51,122 @@ function rpsGameMode() {
       localStorage.setItem('currentGameMode', selectedRpsGameMode.textContent);
 
       rpsFirstToOptions();
+
       break;
 
     case 'First to selected number':
       amountOfRounds.textContent = localStorage.getItem('amountOfRounds');
-
       selectedRpsGameMode.textContent = localStorage.getItem('currentGameMode');
-
       rpsFirstToOptions();
 
       break;
 
     case 'Best out of X':
       amountOfRounds.textContent = localStorage.getItem('outOfAmountOfRounds');
-
       selectedRpsGameMode.textContent = localStorage.getItem('currentGameMode');
-
       rpsBestOutOfOptions();
 
       break;
 
     default:
       console.log("I'm still here");
+  }
+}
+
+function switchRpsGameMode() {
+  let amountOfRounds = document.querySelector('.current-round-number');
+  let selectedRpsGameMode = document.querySelector('.rps-game-mode-choice');
+
+  switch (localStorage.getItem('currentGameMode')) {
+    case 'First to selected number':
+      selectedRpsGameMode.textContent = 'Best out of X';
+      localStorage.setItem('currentGameMode', selectedRpsGameMode.textContent);
+      amountOfRounds.textContent = localStorage.getItem('outOfAmountOfRounds');
+      rpsBestOutOfOptions();
+      break;
+    case 'Best out of X':
+      selectedRpsGameMode.textContent = 'First to selected number';
+      localStorage.setItem('currentGameMode', selectedRpsGameMode.textContent);
+      amountOfRounds.textContent = localStorage.getItem('amountOfRounds');
+      rpsFirstToOptions();
+      break;
+    default:
+      console.log("It's broken");
+  }
+}
+
+function rpsFirstToOptions() {
+  const lowerRoundNumber = document.querySelector('.lower-round-number');
+  const higherRoundNumber = document.querySelector('.higher-round-number');
+
+  lowerRoundNumber.addEventListener('click', lowerRoundNumberFunc);
+  higherRoundNumber.addEventListener('click', higherRoundNumberFunc);
+
+  if (localStorage.getItem('currentGameMode') === 'First to selected number') {
+    lowerRoundNumber.removeEventListener('click', bestOutOfNumberLower);
+    higherRoundNumber.removeEventListener('click', bestOutOfNumberHigher);
+  }
+}
+
+function lowerRoundNumberFunc() {
+  let currentRoundNumber = parseInt(localStorage.getItem('amountOfRounds'));
+  let amountOfRounds = document.querySelector('.current-round-number');
+
+  if (parseInt(localStorage.getItem('amountOfRounds')) > 3) {
+    currentRoundNumber -= 1;
+    amountOfRounds.textContent = currentRoundNumber;
+    localStorage.setItem('amountOfRounds', currentRoundNumber);
+  }
+}
+
+function higherRoundNumberFunc() {
+  let currentRoundNumber = parseInt(localStorage.getItem('amountOfRounds'));
+  let amountOfRounds = document.querySelector('.current-round-number');
+
+  if (parseInt(localStorage.getItem('amountOfRounds')) < 9) {
+    currentRoundNumber += 1;
+    amountOfRounds.textContent = currentRoundNumber;
+    localStorage.setItem('amountOfRounds', currentRoundNumber);
+  }
+}
+
+function rpsBestOutOfOptions() {
+  const lowerRoundNumber = document.querySelector('.lower-round-number');
+  const higherRoundNumber = document.querySelector('.higher-round-number');
+
+  lowerRoundNumber.addEventListener('click', bestOutOfNumberLower);
+  higherRoundNumber.addEventListener('click', bestOutOfNumberHigher);
+
+  if (localStorage.getItem('currentGameMode') === 'Best out of X') {
+    lowerRoundNumber.removeEventListener('click', lowerRoundNumberFunc);
+    higherRoundNumber.removeEventListener('click', higherRoundNumberFunc);
+  }
+}
+
+function bestOutOfNumberLower() {
+  let currentAmountOfRounds = parseInt(
+    localStorage.getItem('outOfAmountOfRounds')
+  );
+  let amountOfRounds = document.querySelector('.current-round-number');
+
+  if (parseInt(localStorage.getItem('outOfAmountOfRounds')) > 3) {
+    console.log(currentAmountOfRounds);
+    currentAmountOfRounds -= 2;
+    amountOfRounds.textContent = currentAmountOfRounds;
+    localStorage.setItem('outOfAmountOfRounds', currentAmountOfRounds);
+  }
+}
+
+function bestOutOfNumberHigher() {
+  let currentAmountOfRounds = parseInt(
+    localStorage.getItem('outOfAmountOfRounds')
+  );
+  let amountOfRounds = document.querySelector('.current-round-number');
+
+  if (parseInt(localStorage.getItem('outOfAmountOfRounds')) < 9) {
+    currentAmountOfRounds += 2;
+    amountOfRounds.textContent = currentAmountOfRounds;
+    localStorage.setItem('outOfAmountOfRounds', currentAmountOfRounds);
   }
 }
 
