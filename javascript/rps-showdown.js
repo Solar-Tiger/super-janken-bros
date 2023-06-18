@@ -34,42 +34,38 @@ function rpsGameMode() {
   let amountOfRounds = document.querySelector('.current-round-number');
   let selectedRpsGameMode = document.querySelector('.rps-game-mode-choice');
   const rpsGameModeButton = document.querySelectorAll('.rps-game-mode-btn');
+  let currentGameMode = localStorage.getItem('currentGameMode');
 
   rpsGameModeButton.forEach((button) => {
     button.addEventListener('click', switchRpsGameMode);
   });
 
-  switch (localStorage.getItem('currentGameMode')) {
-    case null:
-      amountOfRounds.textContent = 5;
-      localStorage.setItem('amountOfRounds', amountOfRounds.textContent);
+  // if null
+  if (currentGameMode === null) {
+    amountOfRounds.textContent = 5;
+    localStorage.setItem('amountOfRounds', amountOfRounds.textContent);
 
-      outOfAmountOfRonuds = 3;
-      localStorage.setItem('outOfAmountOfRounds', outOfAmountOfRonuds);
+    outOfAmountOfRonuds = 3;
+    localStorage.setItem('outOfAmountOfRounds', outOfAmountOfRonuds);
 
-      selectedRpsGameMode.textContent = 'First to selected number';
-      localStorage.setItem('currentGameMode', selectedRpsGameMode.textContent);
+    selectedRpsGameMode.textContent = 'First to selected number';
+    localStorage.setItem('currentGameMode', selectedRpsGameMode.textContent);
 
-      rpsFirstToOptions();
+    rpsFirstToOptions();
+  }
 
-      break;
+  // if First to selected number
+  else if (currentGameMode === 'First to selected number') {
+    amountOfRounds.textContent = localStorage.getItem('amountOfRounds');
+    selectedRpsGameMode.textContent = currentGameMode;
+    rpsFirstToOptions();
+  }
 
-    case 'First to selected number':
-      amountOfRounds.textContent = localStorage.getItem('amountOfRounds');
-      selectedRpsGameMode.textContent = localStorage.getItem('currentGameMode');
-      rpsFirstToOptions();
-
-      break;
-
-    case 'Best out of X':
-      amountOfRounds.textContent = localStorage.getItem('outOfAmountOfRounds');
-      selectedRpsGameMode.textContent = localStorage.getItem('currentGameMode');
-      rpsBestOutOfOptions();
-
-      break;
-
-    default:
-      console.log("I'm still here");
+  // if Best out of X
+  else if (currentGameMode === 'Best out of X') {
+    amountOfRounds.textContent = localStorage.getItem('outOfAmountOfRounds');
+    selectedRpsGameMode.textContent = currentGameMode;
+    rpsBestOutOfOptions();
   }
 }
 
