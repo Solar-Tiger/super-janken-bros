@@ -5,7 +5,9 @@
 
 const rpsShowdownPage = document.querySelector('.rps-showdown');
 
-// RUN SPECIFIC FUNCTION BASED ON WHAT PAGE IS LOADED
+// ---------------------------------------------------------------------------
+//            RUN SPECIFIC FUNCTION BASED ON WHAT PAGE IS LOADED
+// ---------------------------------------------------------------------------
 
 const bodyName = document.body.className;
 
@@ -28,7 +30,11 @@ switch (bodyName) {
     console.log('WRONG');
 }
 
-// OPTIONS FOR VARIOUS FUNCTIONS FOR RPS
+// ---------------------------------------------------------------------------
+//                             RPS OPTIONS PAGE
+// ---------------------------------------------------------------------------
+
+// WHEN PAGE LOADS, SETUP DEFAULT SELECTIONS AND HAVE BUTTONS TO CONTROL WHICH RPS GAME MODE IS SELECTED
 
 function rpsGameMode() {
   let amountOfRounds = document.querySelector('.current-round-number');
@@ -36,9 +42,12 @@ function rpsGameMode() {
   const rpsGameModeButton = document.querySelectorAll('.rps-game-mode-btn');
   let currentGameMode = localStorage.getItem('currentGameMode');
 
+  // CONTROLS WHAT RPS GAME MODE IS SELECTED
   rpsGameModeButton.forEach((button) => {
     button.addEventListener('click', switchRpsGameMode);
   });
+
+  // DEFAULT INSTRUCTIONS FOR WHEN PAGE LOADS
 
   // if null
   if (currentGameMode === null) {
@@ -69,6 +78,8 @@ function rpsGameMode() {
   }
 }
 
+// FUNCTION FOR CHANGING RPS GAME MODES
+
 function switchRpsGameMode() {
   let amountOfRounds = document.querySelector('.current-round-number');
   let selectedRpsGameMode = document.querySelector('.rps-game-mode-choice');
@@ -90,6 +101,8 @@ function switchRpsGameMode() {
       console.log("It's broken");
   }
 }
+
+// FUNCTION FOR FIRST TO SELECTED NUMBER RPS GAME MODE
 
 function rpsFirstToOptions() {
   const lowerRoundNumber = document.querySelector('.lower-round-number');
@@ -125,6 +138,8 @@ function higherRoundNumberFunc() {
     localStorage.setItem('amountOfRounds', currentRoundNumber);
   }
 }
+
+// FUNCTION FOR BEST OUT OF X RPS GAME MODE
 
 function rpsBestOutOfOptions() {
   const lowerRoundNumber = document.querySelector('.lower-round-number');
@@ -166,7 +181,11 @@ function bestOutOfNumberHigher() {
   }
 }
 
-// GET CHARACTER CHOICE AND UPDATE CHARACTER PREVIEW
+// ---------------------------------------------------------------------------
+//            GET CHARACTER CHOICE AND UPDATE CHARACTER PREVIEW
+// ---------------------------------------------------------------------------
+
+// GET CHARACTER CHOICE
 
 function rpsCharacterChoice() {
   let characterPicked = document.querySelector('.character-picked');
@@ -189,6 +208,8 @@ function rpsCharacterChoice() {
   });
 }
 
+// UPDATE CHARACTER PREVIEW
+
 function updatePickedCharacter() {
   const characterPicked = document.querySelector('.character-picked');
 
@@ -199,7 +220,11 @@ function updatePickedCharacter() {
   return characterPicked;
 }
 
-// GET STAGE CHOICE AND UPDATE STAGE PREVIEW
+// ---------------------------------------------------------------------------
+//                GET STAGE CHOICE AND UPDATE STAGE PREVIEW
+// ---------------------------------------------------------------------------
+
+// GET STAGE CHOICE
 
 function rpsStageChoice() {
   let stagePicked = document.querySelector('.stage-picked');
@@ -222,6 +247,8 @@ function rpsStageChoice() {
   });
 }
 
+// UPDATE STAGE PREVIEW
+
 function updateStagePicked() {
   const stagePicked = document.querySelector('.stage-picked');
 
@@ -232,7 +259,9 @@ function updateStagePicked() {
   return stagePicked;
 }
 
-// COMPLETE RPS GAME LOGIC TO PLAY 5 ROUNDS OF RPS
+// ---------------------------------------------------------------------------
+//                              RPS GAME LOGIC
+// ---------------------------------------------------------------------------
 
 function rpsShowdown() {
   const playerChoices = document.querySelector('.player-choices');
@@ -346,6 +375,8 @@ function rpsShowdown() {
     playerChoices.addEventListener('click', gameTime);
   });
 }
+
+// FUNCTION THAT RETRIEVES CHARACTER AND STAGE SELECTIONS
 
 function retrieveResults() {
   // FETCHES RPS CHARACTER PORTRAIT FROM LOCAL STORAGE BASED ON WHAT WAS PICKED AT CHARACTER SELECT
