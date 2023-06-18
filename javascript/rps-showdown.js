@@ -362,17 +362,17 @@ function rpsShowdown() {
 
     // IF RPS CHAMPION GAME MODE IS NULL
     if (rpsChampionGameMode === null) {
-      amountOfRounds.textContent = 5;
-      localStorage.setItem('amountOfRounds', amountOfRounds.textContent);
+      let currentScore = 5;
+      localStorage.setItem('amountOfRounds', currentScore);
 
       let outOfAmountOfRonuds = 3;
       localStorage.setItem('outOfAmountOfRounds', outOfAmountOfRonuds);
 
-      outOfAmountOfRoundsTwo = 2;
+      let outOfAmountOfRoundsTwo = 2;
       localStorage.setItem('outOfAmountOfRoundsTwo', outOfAmountOfRoundsTwo);
 
-      selectedRpsGameMode.textContent = 'First to selected number';
-      localStorage.setItem('currentGameMode', selectedRpsGameMode.textContent);
+      let rpsCurrentGameMode = 'First to selected number';
+      localStorage.setItem('currentGameMode', rpsCurrentGameMode);
     }
 
     // IF RPS CHAMPION GAME MODE IS FIRST TO SELECTED NUMBER
