@@ -306,12 +306,6 @@ function rpsShowdown() {
   playerChoices.addEventListener('click', gameTime);
 
   function gameTime(e) {
-    let rpsButton = e.target.classList[0];
-
-    if (rpsButton !== 'rps-btn') {
-      return;
-    }
-
     let playersChoice = e.target.classList[1];
 
     let roundVictor = decideRoundVictor(playersChoice, computersChoice());
