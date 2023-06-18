@@ -287,6 +287,8 @@ function rpsShowdown() {
   localStorage.removeItem('noChoice');
   localStorage.setItem('noChoice', 0);
   localStorage.removeItem('playerChoice');
+  localStorage.setItem('playerChoice', 'rock');
+  localStorage.removeItem('sameChoice');
 
   // IF RPS CHAMPION GAME MODE IS NULL
   if (rpsChampionGameMode === null) {
@@ -337,10 +339,18 @@ function rpsShowdown() {
 
       localStorage.setItem('noChoice', 1);
 
+      if (pChoice === 'rock') {
+        localStorage.setItem('sameChoice', 1);
+      } else if (pChoice === 'paper') {
+        localStorage.setItem('sameChoice', 2);
+      } else if (pChoice === 'scissors') {
+        localStorage.setItem('sameChoice', 3);
+      }
+
       return computerChoices[computerChoice];
     }
 
-    if (pChoice === 'rock') {
+    if (pChoice === 'rock' && localStorage.getItem('sameChoice') === '1') {
       const computerChoices = [
         'rock',
         'paper',
@@ -365,12 +375,27 @@ function rpsShowdown() {
 
       if (computerChoices[computerChoice] === 'scissors') {
         localStorage.setItem('noChoice', 0);
+        localStorage.setItem('sameChoice', 0);
       }
 
       return computerChoices[computerChoice];
     }
 
-    if (pChoice === 'paper') {
+    if (
+      (pChoice === 'paper' || pChoice === 'scissors') &&
+      localStorage.getItem('sameChoice') === '1'
+    ) {
+      const computerChoices = ['rock', 'paper', 'scissors'];
+
+      let computerChoice = Math.floor(Math.random() * computerChoices.length);
+
+      localStorage.setItem('noChoice', 0);
+      localStorage.setItem('sameChoice', 0);
+
+      return computerChoices[computerChoice];
+    }
+
+    if (pChoice === 'paper' && localStorage.getItem('sameChoice') === '2') {
       const computerChoices = [
         'paper',
         'scissors',
@@ -395,12 +420,27 @@ function rpsShowdown() {
 
       if (computerChoices[computerChoice] === 'rock') {
         localStorage.setItem('noChoice', 0);
+        localStorage.setItem('sameChoice', 0);
       }
 
       return computerChoices[computerChoice];
     }
 
-    if (pChoice === 'scissors') {
+    if (
+      (pChoice === 'rock' || pChoice === 'scissors') &&
+      localStorage.getItem('sameChoice') === '2'
+    ) {
+      const computerChoices = ['rock', 'paper', 'scissors'];
+
+      let computerChoice = Math.floor(Math.random() * computerChoices.length);
+
+      localStorage.setItem('noChoice', 0);
+      localStorage.setItem('sameChoice', 0);
+
+      return computerChoices[computerChoice];
+    }
+
+    if (pChoice === 'scissors' && localStorage.getItem('sameChoice') === '3') {
       const computerChoices = [
         'rock',
         'scissors',
@@ -425,7 +465,22 @@ function rpsShowdown() {
 
       if (computerChoices[computerChoice] === 'paper') {
         localStorage.setItem('noChoice', 0);
+        localStorage.setItem('sameChoice', 0);
       }
+
+      return computerChoices[computerChoice];
+    }
+
+    if (
+      (pChoice === 'rock' || pChoice === 'paper') &&
+      localStorage.getItem('sameChoice') === '3'
+    ) {
+      const computerChoices = ['rock', 'paper', 'scissors'];
+
+      let computerChoice = Math.floor(Math.random() * computerChoices.length);
+
+      localStorage.setItem('noChoice', 0);
+      localStorage.setItem('sameChoice', 0);
 
       return computerChoices[computerChoice];
     }
@@ -530,7 +585,7 @@ function rpsShowdown() {
     computerScore.textContent = 0;
 
     localStorage.setItem('noChoice', 0);
-    localStorage.removeItem('playerChoice');
+    localStorage.setItem('sameChoice', 0);
 
     rpsUpdates.textContent = 'Click buttons to begin!';
 
