@@ -284,6 +284,8 @@ function rpsShowdown() {
   const resetButton = document.querySelector('.reset-button');
   let rpsChampionGameMode = localStorage.getItem('currentGameMode');
 
+  localStorage.setItem('noChoice', 0);
+
   // IF RPS CHAMPION GAME MODE IS NULL
   if (rpsChampionGameMode === null) {
     let currentScore = 5;
@@ -308,6 +310,8 @@ function rpsShowdown() {
   function gameTime(e) {
     let playersChoice = e.target.classList[1];
 
+    localStorage.setItem('playerChoice', playersChoice);
+
     let roundVictor = decideRoundVictor(playersChoice, computersChoice());
 
     updateRPSScore(roundVictor);
@@ -318,11 +322,87 @@ function rpsShowdown() {
   // GET COMUTER CHOICE OF ROCK, PAPER OR SCISSORS AND RETURN RESULT
 
   function computersChoice() {
-    const computerChoices = ['rock', 'paper', 'scissors'];
+    if (
+      (pChoice === 'rock' || pChoice === 'paper' || pChoice === 'scissors') &&
+      localStorage.getItem('noChoice') === '0'
+    ) {
+      const computerChoices = ['rock', 'paper', 'scissors'];
 
-    let computerChoice = Math.floor(Math.random() * computerChoices.length);
+      let computerChoice = Math.floor(Math.random() * computerChoices.length);
 
-    return computerChoices[computerChoice];
+      localStorage.setItem('noChoice', 1);
+
+      return computerChoices[computerChoice];
+    }
+
+    if (pChoice === 'rock') {
+      const computerChoices = [
+        'rock',
+        'paper',
+        'rock',
+        'paper',
+        'scissors',
+        'paper',
+        'rock',
+        'paper',
+        'rock',
+        'scissors',
+      ];
+
+      let computerChoice = Math.floor(Math.random() * computerChoices.length);
+
+      if (computerChoices[computerChoice] === 'scissors') {
+        localStorage.setItem('noChoice', 0);
+      }
+
+      return computerChoices[computerChoice];
+    }
+
+    if (pChoice === 'paper') {
+      const computerChoices = [
+        'paper',
+        'scissors',
+        'paper',
+        'scissors',
+        'rock',
+        'scissors',
+        'paper',
+        'scissors',
+        'paper',
+        'rock',
+      ];
+
+      let computerChoice = Math.floor(Math.random() * computerChoices.length);
+
+      if (computerChoices[computerChoice] === 'rock') {
+        localStorage.setItem('noChoice', 0);
+      }
+
+      return computerChoices[computerChoice];
+    }
+
+    if (pChoice === 'scissors') {
+      const computerChoices = [
+        'rock',
+        'scissors',
+        'rock',
+        'scissors',
+        'paper',
+        'scissors',
+        'rock',
+        'scissors',
+        'rock',
+        'paper',
+      ];
+
+      let computerChoice = Math.floor(Math.random() * computerChoices.length);
+
+      if (computerChoices[computerChoice] === 'paper') {
+        localStorage.setItem('noChoice', 0);
+      }
+
+      return computerChoices[computerChoice];
+    }
   }
 
   // DECIDE IF YOU WIN, LOSE OR TIE AND RETURN THAT VALUE
