@@ -282,6 +282,22 @@ function rpsShowdown() {
   let computerScore = document.querySelector('.computer-score');
   let rpsUpdates = document.querySelector('.choices-made');
   const resetButton = document.querySelector('.reset-button');
+  let rpsChampionGameMode = localStorage.getItem('currentGameMode');
+
+  // IF RPS CHAMPION GAME MODE IS NULL
+  if (rpsChampionGameMode === null) {
+    let currentScore = 5;
+    localStorage.setItem('amountOfRounds', currentScore);
+
+    let outOfAmountOfRonuds = 3;
+    localStorage.setItem('outOfAmountOfRounds', outOfAmountOfRonuds);
+
+    let outOfAmountOfRoundsTwo = 2;
+    localStorage.setItem('outOfAmountOfRoundsTwo', outOfAmountOfRoundsTwo);
+
+    let rpsCurrentGameMode = 'First to selected number';
+    localStorage.setItem('currentGameMode', rpsCurrentGameMode);
+  }
 
   // ASIGN BOTH PLAYER AND COMPUTER A SCORE OF 0
   let playerUpdatedScore = 0;
@@ -360,23 +376,8 @@ function rpsShowdown() {
   function rpsChampion() {
     let rpsChampionGameMode = localStorage.getItem('currentGameMode');
 
-    // IF RPS CHAMPION GAME MODE IS NULL
-    if (rpsChampionGameMode === null) {
-      let currentScore = 5;
-      localStorage.setItem('amountOfRounds', currentScore);
-
-      let outOfAmountOfRonuds = 3;
-      localStorage.setItem('outOfAmountOfRounds', outOfAmountOfRonuds);
-
-      let outOfAmountOfRoundsTwo = 2;
-      localStorage.setItem('outOfAmountOfRoundsTwo', outOfAmountOfRoundsTwo);
-
-      let rpsCurrentGameMode = 'First to selected number';
-      localStorage.setItem('currentGameMode', rpsCurrentGameMode);
-    }
-
     // IF RPS CHAMPION GAME MODE IS FIRST TO SELECTED NUMBER
-    else if (rpsChampionGameMode === 'First to selected number') {
+    if (rpsChampionGameMode === 'First to selected number') {
       let firstToNumberScore = localStorage.getItem('amountOfRounds');
 
       if (playerUpdatedScore === parseInt(firstToNumberScore)) {
