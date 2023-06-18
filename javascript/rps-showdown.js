@@ -351,10 +351,17 @@ function rpsShowdown() {
         'rock',
         'paper',
         'rock',
+        'paper',
+        'rock',
+        'paper',
+        'rock',
+        'paper',
         'scissors',
       ];
 
       let computerChoice = Math.floor(Math.random() * computerChoices.length);
+
+      console.log(computerChoices[computerChoice]);
 
       if (computerChoices[computerChoice] === 'scissors') {
         localStorage.setItem('noChoice', 0);
@@ -374,10 +381,17 @@ function rpsShowdown() {
         'paper',
         'scissors',
         'paper',
+        'scissors',
+        'paper',
+        'scissors',
+        'paper',
+        'scissors',
         'rock',
       ];
 
       let computerChoice = Math.floor(Math.random() * computerChoices.length);
+
+      console.log(computerChoices[computerChoice]);
 
       if (computerChoices[computerChoice] === 'rock') {
         localStorage.setItem('noChoice', 0);
@@ -397,10 +411,17 @@ function rpsShowdown() {
         'rock',
         'scissors',
         'rock',
+        'scissors',
+        'rock',
+        'scissors',
+        'rock',
+        'scissors',
         'paper',
       ];
 
       let computerChoice = Math.floor(Math.random() * computerChoices.length);
+
+      console.log(computerChoices[computerChoice]);
 
       if (computerChoices[computerChoice] === 'paper') {
         localStorage.setItem('noChoice', 0);
@@ -509,6 +530,7 @@ function rpsShowdown() {
     computerScore.textContent = 0;
 
     localStorage.setItem('noChoice', 0);
+    localStorage.removeItem('playerChoice');
 
     rpsUpdates.textContent = 'Click buttons to begin!';
 
