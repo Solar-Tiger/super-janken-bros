@@ -365,7 +365,6 @@ function rpsShowdown() {
         'rock',
         'paper',
         'rock',
-        'scissors',
         'paper',
         'rock',
         'paper',
@@ -377,8 +376,6 @@ function rpsShowdown() {
       ];
 
       let computerChoice = Math.floor(Math.random() * computerChoices.length);
-
-      console.log(computerChoices[computerChoice]);
 
       if (computerChoices[computerChoice] === 'scissors') {
         localStorage.setItem('noChoice', 0);
@@ -413,7 +410,6 @@ function rpsShowdown() {
         'paper',
         'scissors',
         'paper',
-        'rock',
         'scissors',
         'paper',
         'scissors',
@@ -461,7 +457,6 @@ function rpsShowdown() {
         'rock',
         'scissors',
         'rock',
-        'paper',
         'scissors',
         'rock',
         'scissors',
