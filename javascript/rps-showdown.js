@@ -383,6 +383,7 @@ function rpsShowdown() {
       if (computerChoices[computerChoice] === 'scissors') {
         localStorage.setItem('noChoice', 0);
         localStorage.setItem('sameChoice', 0);
+        noChoice = 0;
       }
 
       return computerChoices[computerChoice];
@@ -398,6 +399,7 @@ function rpsShowdown() {
 
       localStorage.setItem('noChoice', 0);
       localStorage.setItem('sameChoice', 0);
+      noChoice = 0;
 
       return computerChoices[computerChoice];
     }
@@ -429,6 +431,7 @@ function rpsShowdown() {
       if (computerChoices[computerChoice] === 'rock') {
         localStorage.setItem('noChoice', 0);
         localStorage.setItem('sameChoice', 0);
+        noChoice = 0;
       }
 
       return computerChoices[computerChoice];
@@ -444,6 +447,7 @@ function rpsShowdown() {
 
       localStorage.setItem('noChoice', 0);
       localStorage.setItem('sameChoice', 0);
+      noChoice = 0;
 
       return computerChoices[computerChoice];
     }
@@ -475,6 +479,7 @@ function rpsShowdown() {
       if (computerChoices[computerChoice] === 'paper') {
         localStorage.setItem('noChoice', 0);
         localStorage.setItem('sameChoice', 0);
+        noChoice = 0;
       }
 
       return computerChoices[computerChoice];
@@ -490,6 +495,7 @@ function rpsShowdown() {
 
       localStorage.setItem('noChoice', 0);
       localStorage.setItem('sameChoice', 0);
+      noChoice = 0;
 
       return computerChoices[computerChoice];
     }
@@ -593,7 +599,8 @@ function rpsShowdown() {
     computerUpdatedScore = 0;
     computerScore.textContent = 0;
 
-    localStorage.setItem('noChoice', 0);
+    noChoice = 0;
+    localStorage.removeItem('noChoice');
     localStorage.setItem('sameChoice', 0);
 
     rpsUpdates.textContent = 'Click buttons to begin!';
