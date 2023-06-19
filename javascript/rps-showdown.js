@@ -308,6 +308,7 @@ function rpsShowdown() {
   // ASIGN BOTH PLAYER AND COMPUTER A SCORE OF 0
   let playerUpdatedScore = 0;
   let computerUpdatedScore = 0;
+  let noChoice = 0;
 
   playerChoices.addEventListener('click', gameTime);
 
@@ -331,20 +332,25 @@ function rpsShowdown() {
   function computersChoice(pChoice) {
     if (
       (pChoice === 'rock' || pChoice === 'paper' || pChoice === 'scissors') &&
-      localStorage.getItem('noChoice') === '0'
+      localStorage.getItem('noChoice') !== '2'
     ) {
       const computerChoices = ['rock', 'paper', 'scissors'];
 
       let computerChoice = Math.floor(Math.random() * computerChoices.length);
 
-      localStorage.setItem('noChoice', 1);
+      if (localStorage.getItem('noChoice') !== '2') {
+        noChoice += 1;
+        localStorage.setItem('noChoice', noChoice);
+      }
 
-      if (pChoice === 'rock') {
-        localStorage.setItem('sameChoice', 1);
-      } else if (pChoice === 'paper') {
-        localStorage.setItem('sameChoice', 2);
-      } else if (pChoice === 'scissors') {
-        localStorage.setItem('sameChoice', 3);
+      if (localStorage.getItem('noChoice') === '2') {
+        if (pChoice === 'rock') {
+          localStorage.setItem('sameChoice', 1);
+        } else if (pChoice === 'paper') {
+          localStorage.setItem('sameChoice', 2);
+        } else if (pChoice === 'scissors') {
+          localStorage.setItem('sameChoice', 3);
+        }
       }
 
       return computerChoices[computerChoice];
