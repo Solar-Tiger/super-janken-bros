@@ -20,6 +20,18 @@ body {
   color: black;
 }
 
+.title {
+  padding-top: 10px;
+}
+
+.links-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding-bottom: 10px;
+}
+
 /* RPS OPTIONS */
 
 .rps-choices-container {
@@ -83,7 +95,7 @@ body {
 }
 
 .image-container {
-  flex: 1 1 33.333333%;
+  /* flex: 1 1 33.333333%; ----- Removed to keep aspect ratio */
   border: 2px solid black;
 }
 
