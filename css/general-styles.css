@@ -67,34 +67,39 @@ body.rps-showdown {
 /* RPS CHARACTER SELECT */
 
 #rps-character-select {
-  display: flex;
-  flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
-  text-align: center;
-  height: 100vh;
-  gap: 25px;
 }
 
 .character-select-box {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 75%;
+  width: 80%;
   gap: 10px;
 }
 
 .characters {
   display: flex;
-  width: 75%;
+  width: 80%;
   justify-content: center;
   align-items: center;
   gap: 10px;
 }
 
+.image-container {
+  flex: 1 1 33.333333%;
+  border: 2px solid black;
+}
+
 .character-portrait {
-  aspect-ratio: 1/1;
-  flex: 0 0.25 125px;
+  display: block;
+  width: 100%;
+  max-width: 125px;
+  min-width: 80px;
+  height: auto;
+}
+
+.character-picked {
   border: 2px solid black;
 }
 
