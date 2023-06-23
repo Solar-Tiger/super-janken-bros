@@ -20,6 +20,8 @@ switch (bodyName) {
     break;
   case 'rps-stage-select':
     rpsStageChoice();
+
+    rpsSongSelector();
     break;
   case 'rps-showdown':
     retrieveResults();
@@ -273,6 +275,92 @@ function updateStagePicked() {
 }
 
 // ---------------------------------------------------------------------------
+//                          SONG SELECTION MENU
+// ---------------------------------------------------------------------------
+
+function rpsSongSelector() {
+  let currentSongDisplay = document.querySelector('.current-song');
+  const nextSong = document.querySelector('.next-song');
+  const previousSong = document.querySelector('.previous-song');
+  let audioNow;
+
+  const songList = [
+    { songName: 'Megalovania', location: 'songs/megalovania.mp3' },
+    { songName: 'You Say Run', location: 'songs/you-say-run.mp3' },
+    {
+      songName: 'Unavoidable Battle',
+      location: 'songs/unavoidable-battle.mp3',
+    },
+    {
+      songName: 'Confidence in the Domination',
+      location: 'songs/confidence-in-the-domination.mp3',
+    },
+    {
+      songName: 'A Formidable Foe Stands in the way',
+      location: 'songs/a-formidable-foe-stands-in-the-way.mp3',
+    },
+  ];
+
+  if (!localStorage.getItem('currentSong')) {
+    localStorage.setItem('songName', songList[0].songName);
+    localStorage.setItem('currentSong', songList[0].location);
+    localStorage.setItem('songNumber', 0);
+    currentSongDisplay.textContent = localStorage.getItem('songName');
+  } else {
+    currentSongDisplay.textContent = localStorage.getItem('songName');
+
+    document.body.onload = () => {
+      playSongOnPageLoad();
+    };
+  }
+
+  function playSongOnPageLoad() {
+    let newSong = localStorage.getItem('currentSong');
+    const audio = (audioNow = new Audio(newSong));
+    audio.volume = 0.05;
+    audio.play();
+  }
+
+  function playAudio(songPlaying) {
+    if (audioNow) {
+      audioNow.pause();
+      audioNow.currentTime = 0;
+    }
+    const audio = (audioNow = new Audio(songPlaying));
+    audio.volume = 0.05;
+    audio.play();
+  }
+
+  let songNumber = parseInt(localStorage.getItem('songNumber'));
+
+  nextSong.addEventListener('click', () => {
+    if (songList.length - 1 > songNumber && songNumber !== songList.length) {
+      songNumber += 1;
+
+      currentSongDisplay.textContent = songList[songNumber].songName;
+      localStorage.setItem('songName', songList[songNumber].songName);
+      localStorage.setItem('currentSong', songList[songNumber].location);
+      localStorage.setItem('songNumber', songNumber);
+
+      playAudio(songList[songNumber].location);
+    }
+  });
+
+  previousSong.addEventListener('click', () => {
+    if (songList.length > songNumber && songNumber !== 0) {
+      songNumber -= 1;
+
+      currentSongDisplay.textContent = songList[songNumber].songName;
+      localStorage.setItem('songName', songList[songNumber].songName);
+      localStorage.setItem('currentSong', songList[songNumber].location);
+      localStorage.setItem('songNumber', songNumber);
+
+      playAudio(songList[songNumber].location);
+    }
+  });
+}
+
+// ---------------------------------------------------------------------------
 //                              RPS GAME LOGIC
 // ---------------------------------------------------------------------------
 
@@ -283,6 +371,12 @@ function rpsShowdown() {
   let rpsUpdates = document.querySelector('.choices-made');
   const resetButton = document.querySelector('.reset-button');
   let rpsChampionGameMode = localStorage.getItem('currentGameMode');
+
+  let battleSongToPlay = localStorage.getItem('currentSong');
+  let battleSong = new Audio(battleSongToPlay);
+
+  battleSong.volume = 0.05;
+  battleSong.play();
 
   localStorage.removeItem('noChoice');
   localStorage.setItem('noChoice', 0);
@@ -468,8 +562,6 @@ function rpsShowdown() {
       ];
 
       let computerChoice = Math.floor(Math.random() * computerChoices.length);
-
-      console.log(computerChoices[computerChoice]);
 
       if (computerChoices[computerChoice] === 'paper') {
         localStorage.setItem('noChoice', 0);

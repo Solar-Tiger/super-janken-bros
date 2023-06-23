@@ -169,6 +169,33 @@ body {
 
 /*
 ------------------------------------------------------------------------------
+-                            RPS SONG SELECTION                              -
+------------------------------------------------------------------------------
+*/
+
+.song-selection-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 15px;
+  min-width: 350px;
+  min-height: 80px;
+}
+
+.song-button {
+  width: 75px;
+  min-height: 30px;
+}
+
+.current-song {
+  max-width: 170px;
+  min-width: 170px;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+/*
+------------------------------------------------------------------------------
 -                      RPS SHOWDOWN CHARACTER PORTRAIT                       -
 ------------------------------------------------------------------------------
 */
