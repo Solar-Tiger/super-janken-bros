@@ -397,7 +397,7 @@ function unlockSongs() {
     },
   ];
 
-  if (firstTo4WinsSongUnlocks > 5) {
+  if (firstTo4WinsSongUnlocks >= 5) {
     songList.push({
       songName: 'Insatiable',
       location: 'songs/insatiable.mp3',
