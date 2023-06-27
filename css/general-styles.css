@@ -80,6 +80,36 @@ body {
   min-height: 60px;
 }
 
+.rps-scores-container > p {
+  font-size: 24px;
+}
+
+/*
+------------------------------------------------------------------------------
+-                             RPS SCORES MENU                                -
+------------------------------------------------------------------------------
+*/
+
+.rps-win-loss-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.first-to-selected-number {
+  display: flex;
+  flex-direction: column;
+}
+
+.rps-win-loss-scores-display-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.win-loss-display-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 /*
 ------------------------------------------------------------------------------
 -                            RPS CHARACTER SELECT                            -
