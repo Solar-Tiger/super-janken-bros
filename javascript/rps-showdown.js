@@ -15,6 +15,9 @@ switch (bodyName) {
   case 'rps-options':
     rpsGameMode();
     break;
+  case 'rps-scores':
+    rpsScores();
+    break;
   case 'rps-character-select':
     rpsCharacterChoice();
     break;
@@ -196,6 +199,14 @@ function bestOutOfNumberHigher() {
     localStorage.setItem('outOfAmountOfRounds', currentAmountOfRounds);
     localStorage.setItem('outOfAmountOfRoundsTwo', currentAmountOfRoundsTwo);
   }
+}
+
+// ---------------------------------------------------------------------------
+//                             RPS SCORES PAGE
+// ---------------------------------------------------------------------------
+
+function rpsScores() {
+  // test
 }
 
 // ---------------------------------------------------------------------------
