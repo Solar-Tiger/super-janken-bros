@@ -59,7 +59,7 @@ function rpsGameMode() {
 
   // if null
   if (currentGameMode === null) {
-    amountOfRounds.textContent = 5;
+    amountOfRounds.textContent = 4;
     localStorage.setItem('amountOfRounds', amountOfRounds.textContent);
 
     let outOfAmountOfRonuds = 3;
@@ -132,8 +132,8 @@ function lowerRoundNumberFunc() {
   let currentRoundNumber = parseInt(localStorage.getItem('amountOfRounds'));
   let amountOfRounds = document.querySelector('.current-round-number');
 
-  if (parseInt(localStorage.getItem('amountOfRounds')) > 3) {
-    currentRoundNumber -= 1;
+  if (parseInt(localStorage.getItem('amountOfRounds')) > 4) {
+    currentRoundNumber -= 2;
     amountOfRounds.textContent = currentRoundNumber;
     localStorage.setItem('amountOfRounds', currentRoundNumber);
   }
@@ -143,8 +143,8 @@ function higherRoundNumberFunc() {
   let currentRoundNumber = parseInt(localStorage.getItem('amountOfRounds'));
   let amountOfRounds = document.querySelector('.current-round-number');
 
-  if (parseInt(localStorage.getItem('amountOfRounds')) < 9) {
-    currentRoundNumber += 1;
+  if (parseInt(localStorage.getItem('amountOfRounds')) < 8) {
+    currentRoundNumber += 2;
     amountOfRounds.textContent = currentRoundNumber;
     localStorage.setItem('amountOfRounds', currentRoundNumber);
   }
@@ -206,7 +206,26 @@ function bestOutOfNumberHigher() {
 // ---------------------------------------------------------------------------
 
 function rpsScores() {
-  // test
+  const firstTo4Wins = document.querySelector('.first-to-4-wins');
+  const firstTo6Wins = document.querySelector('.first-to-6-wins');
+  const firstTo8Wins = document.querySelector('.first-to-8-wins');
+  const firstTo4Losses = document.querySelector('.first-to-4-losses');
+  const firstTo6Losses = document.querySelector('.first-to-6-losses');
+  const firstTo8Losses = document.querySelector('.first-to-8-losses');
+
+  if (!localStorage.getItem('firstTo4Wins')) {
+    firstTo4Wins.textContent = 0;
+    firstTo6Wins.textContent = 0;
+    firstTo8Wins.textContent = 0;
+
+    localStorage.setItem('firstTo4Wins', firstTo4Wins.textContent);
+    localStorage.setItem('firstTo6Wins', firstTo6Wins.textContent);
+    localStorage.setItem('firstTo8Wins', firstTo8Wins.textContent);
+  } else {
+    firstTo4Wins.textContent = localStorage.getItem('firstTo4Wins');
+    firstTo6Wins.textContent = localStorage.getItem('firstTo6Wins');
+    firstTo8Wins.textContent = localStorage.getItem('firstTo8Wins');
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -402,7 +421,7 @@ function rpsShowdown() {
   let battleSongToPlay = localStorage.getItem('currentSong');
   let battleSong = new Audio(battleSongToPlay);
 
-  battleSong.volume = 0.05;
+  battleSong.volume = 0.2;
   battleSong.play();
 
   localStorage.removeItem('noChoice');
@@ -420,6 +439,7 @@ function rpsShowdown() {
     localStorage.setItem('outOfAmountOfRounds', outOfAmountOfRonuds);
 
     let outOfAmountOfRoundsTwo = 2;
+    firstToNumberSc;
     localStorage.setItem('outOfAmountOfRoundsTwo', outOfAmountOfRoundsTwo);
 
     let rpsCurrentGameMode = 'First to selected number';
@@ -543,8 +563,6 @@ function rpsShowdown() {
 
       let computerChoice = Math.floor(Math.random() * computerChoices.length);
 
-      console.log(computerChoices[computerChoice]);
-
       if (computerChoices[computerChoice] === 'rock') {
         localStorage.setItem('noChoice', 0);
         localStorage.setItem('sameChoice', 0);
@@ -662,16 +680,43 @@ function rpsShowdown() {
 
     // IF RPS CHAMPION GAME MODE IS FIRST TO SELECTED NUMBER
     if (rpsChampionGameMode === 'First to selected number') {
-      let firstToNumberScore = localStorage.getItem('amountOfRounds');
+      let firstToNumberScore = parseInt(localStorage.getItem('amountOfRounds'));
 
-      if (playerUpdatedScore === parseInt(firstToNumberScore)) {
+      let firstTo4WinsBestScore = parseInt(
+        localStorage.getItem('firstTo4Wins')
+      );
+      let firstTo6WinsBestScore = parseInt(
+        localStorage.getItem('firstTo6Wins')
+      );
+      let firstTo8WinsBestScore = parseInt(
+        localStorage.getItem('firstTo8Wins')
+      );
+
+      if (playerUpdatedScore === firstToNumberScore) {
         rpsUpdates.textContent = 'Player is the champion!';
+
+        if (
+          rpsChampionGameMode === 'First to selected number' &&
+          firstToNumberScore === 4
+        ) {
+          localStorage.setItem('firstTo4Wins', firstTo4WinsBestScore + 1);
+        } else if (
+          rpsChampionGameMode === 'First to selected number' &&
+          firstToNumberScore === 6
+        ) {
+          localStorage.setItem('firstTo6Wins', firstTo6WinsBestScore + 1);
+        } else if (
+          rpsChampionGameMode === 'First to selected number' &&
+          firstToNumberScore === 8
+        ) {
+          localStorage.setItem('firstTo4Wins', firstTo8WinsBestScore + 1);
+        }
 
         playerChoices.removeEventListener('click', gameTime);
       }
 
       // code
-      if (computerUpdatedScore === parseInt(firstToNumberScore)) {
+      if (computerUpdatedScore === firstToNumberScore) {
         rpsUpdates.textContent = 'Computer is the champion!';
 
         playerChoices.removeEventListener('click', gameTime);

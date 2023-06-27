@@ -93,11 +93,13 @@ body {
 .rps-win-loss-container {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
 .first-to-selected-number {
   display: flex;
   flex-direction: column;
+  gap: 6px;
 }
 
 .rps-win-loss-scores-display-container {
@@ -105,9 +107,17 @@ body {
   justify-content: space-evenly;
 }
 
+.rps-win-loss-scores-display-container > p {
+  font-size: 36px;
+}
+
 .win-loss-display-container {
   display: flex;
   justify-content: space-evenly;
+}
+
+.rps-win-loss-container {
+  font-size: 20px;
 }
 
 /*
