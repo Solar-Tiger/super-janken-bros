@@ -21,6 +21,8 @@ switch (bodyName) {
   case 'rps-stage-select':
     rpsStageChoice();
 
+    let songList;
+
     rpsSongSelector();
     break;
   case 'rps-showdown':
@@ -284,23 +286,6 @@ function rpsSongSelector() {
   const previousSong = document.querySelector('.previous-song');
   let audioNow;
 
-  const songList = [
-    { songName: 'Megalovania', location: 'songs/megalovania.mp3' },
-    { songName: 'You Say Run', location: 'songs/you-say-run.mp3' },
-    {
-      songName: 'Unavoidable Battle',
-      location: 'songs/unavoidable-battle.mp3',
-    },
-    {
-      songName: 'Confidence in the Domination',
-      location: 'songs/confidence-in-the-domination.mp3',
-    },
-    {
-      songName: 'A Formidable Foe Stands in the way',
-      location: 'songs/a-formidable-foe-stands-in-the-way.mp3',
-    },
-  ];
-
   if (!localStorage.getItem('currentSong')) {
     localStorage.setItem('songName', songList[0].songName);
     localStorage.setItem('currentSong', songList[0].location);
@@ -314,10 +299,12 @@ function rpsSongSelector() {
     };
   }
 
+  unlockSongs();
+
   function playSongOnPageLoad() {
     let newSong = localStorage.getItem('currentSong');
     const audio = (audioNow = new Audio(newSong));
-    audio.volume = 0.05;
+    audio.volume = 0.2;
     audio.play();
   }
 
@@ -327,7 +314,7 @@ function rpsSongSelector() {
       audioNow.currentTime = 0;
     }
     const audio = (audioNow = new Audio(songPlaying));
-    audio.volume = 0.05;
+    audio.volume = 0.2;
     audio.play();
   }
 
@@ -360,6 +347,35 @@ function rpsSongSelector() {
   });
 }
 
+function unlockSongs() {
+  let bestScore = 6;
+
+  songList = [
+    { songName: 'Megalovania', location: 'songs/megalovania.mp3' },
+    { songName: 'You Say Run', location: 'songs/you-say-run.mp3' },
+    {
+      songName: 'Unavoidable Battle',
+      location: 'songs/unavoidable-battle.mp3',
+    },
+    {
+      songName: 'Confidence in the Domination',
+      location: 'songs/confidence-in-the-domination.mp3',
+    },
+    {
+      songName: 'A Formidable Foe Stands in the way',
+      location: 'songs/a-formidable-foe-stands-in-the-way.mp3',
+    },
+  ];
+
+  if (bestScore > 5) {
+    songList.push({
+      songName: 'Insatiable',
+      location: 'songs/insatiable.mp3',
+    });
+  }
+
+  return songList;
+}
 // ---------------------------------------------------------------------------
 //                              RPS GAME LOGIC
 // ---------------------------------------------------------------------------
