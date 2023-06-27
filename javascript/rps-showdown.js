@@ -378,7 +378,7 @@ function rpsSongSelector() {
 }
 
 function unlockSongs() {
-  let bestScore = 6;
+  let firstTo4WinsSongUnlocks = parseInt(localStorage.getItem('firstTo4Wins'));
 
   songList = [
     { songName: 'Megalovania', location: 'songs/megalovania.mp3' },
@@ -397,7 +397,7 @@ function unlockSongs() {
     },
   ];
 
-  if (bestScore > 5) {
+  if (firstTo4WinsSongUnlocks > 5) {
     songList.push({
       songName: 'Insatiable',
       location: 'songs/insatiable.mp3',
