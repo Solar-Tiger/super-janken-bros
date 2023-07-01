@@ -316,6 +316,8 @@ function rpsSongSelector() {
   const previousSong = document.querySelector('.previous-song');
   let audioNow;
 
+  unlockSongs();
+
   if (!localStorage.getItem('currentSong')) {
     localStorage.setItem('songName', songList[0].songName);
     localStorage.setItem('currentSong', songList[0].location);
@@ -329,7 +331,7 @@ function rpsSongSelector() {
     };
   }
 
-  unlockSongs();
+  // unlockSongs();
 
   function playSongOnPageLoad() {
     let newSong = localStorage.getItem('currentSong');
