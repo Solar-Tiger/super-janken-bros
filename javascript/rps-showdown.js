@@ -399,7 +399,9 @@ function unlockSongs() {
     },
   ];
 
-  if (firstTo4WinsSongUnlocks >= 5) {
+  console.log(songList.length);
+
+  if (firstTo4WinsSongUnlocks >= 5 && songList.length < 6) {
     songList.push({
       songName: 'Insatiable',
       location: 'songs/insatiable.mp3',
@@ -441,7 +443,6 @@ function rpsShowdown() {
     localStorage.setItem('outOfAmountOfRounds', outOfAmountOfRonuds);
 
     let outOfAmountOfRoundsTwo = 2;
-    firstToNumberSc;
     localStorage.setItem('outOfAmountOfRoundsTwo', outOfAmountOfRoundsTwo);
 
     let rpsCurrentGameMode = 'First to selected number';
